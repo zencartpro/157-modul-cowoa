@@ -1,0 +1,4 @@
+<?php
+$db->Execute("UPDATE " . TABLE_CONFIGURATION . " SET configuration_description = 'Enable The Order Status Function of COWOA?<br/>Set to True so that customers that uses COWOA will receive a link in order emails and order status update emails which allows them to track the status of their orders.' WHERE configuration_key = 'COWOA_ORDER_STATUS';");
+$db->Execute("UPDATE " . TABLE_CONFIGURATION_LANGUAGE . " SET configuration_description = 'COWOA - Bestellstatusfunktionalität aktivieren<br/>Stellen Sie auf true, damit Kunden, die ohne Kundenkonto bestellen, einen Link in Bestell-E-Mails und Bestellstatus-Update-E-Mails erhalten, mit dem sie den Status ihrer Bestellungen verfolgen können.' WHERE configuration_key = 'COWOA_ORDER_STATUS' AND configuration_language_id = '43';");
+$db->Execute("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '3.6.0' WHERE configuration_key = 'COWOA_MODUL_VERSION';");
