@@ -7,13 +7,17 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: header_php.php 2022-02-19 18:10:00 webchills
+ * @version $Id: header_php.php 2022-03-27 19:28:00 webchills
 
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_HEADER_START_ORDER_STATUS');
 $errorInvalidID='';
 $errorInvalidEmail='';
+$_SESSION['customer_country_id'] = STORE_COUNTRY;
+$_SESSION['customer_zone_id'] = STORE_ZONE;
+if (!isset($_GET['order_id']) || (isset($_GET['order_id']) && !is_numeric($_GET['order_id'])))
+$_GET['order_id']='';
 if (!isset($_POST['order_id']) || (isset($_POST['order_id']) && !is_numeric($_POST['order_id'])))
   $errorInvalidID=TRUE;
 

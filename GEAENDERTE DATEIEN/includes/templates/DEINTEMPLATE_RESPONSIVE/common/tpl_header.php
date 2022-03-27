@@ -14,7 +14,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_header.php for COWOA 2022-02-19 18:53:58Z webchills $
+ * @version $Id: tpl_header.php for COWOA 2022-03-27 16:31:58Z webchills $
  */
 ?>
 
@@ -61,7 +61,7 @@ echo '<div class="header Fixed"><a href="#menu" title="Menu"><i class="fa fa-bar
     if (zen_is_logged_in() && !zen_in_guest_checkout()) {
 ?>
     <li><a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><i class="fa fa-sign-out" title="Log Off"></i></a></li>
-    <?php if ($_SESSION['COWOA'] == false) { ?>
+<?php if ($_SESSION['COWOA'] && $_SESSION['COWOA'] == false) { ?>
 <?php if ($_SESSION['cart']->count_contents() != 0) { ?>
     <li><a href="<?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>"><i class="fa fa-user" title="My Account"></i></a></li>
 <?php } else { ?>
@@ -105,7 +105,7 @@ echo '<div class="header Fixed"><a href="#menu" title="Menu"><i class="fa fa-bar
         if (zen_is_logged_in() && !zen_in_guest_checkout()) {
 ?>
     <li><a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo HEADER_TITLE_LOGOFF; ?></a></li>
-    <?php if ($_SESSION['COWOA'] == false) { ?>
+   <?php if ($_SESSION['COWOA'] && $_SESSION['COWOA'] == false) { ?>
 <?php if ($_SESSION['cart']->count_contents() != 0) { ?>
 <li><a href="<?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>"><?php echo HEADER_TITLE_MY_ACCOUNT; ?></a></li>
 	    <?php } else { ?>
@@ -152,8 +152,8 @@ echo '<div class="header Fixed"><a href="#menu" title="Menu"><i class="fa fa-bar
     if (zen_is_logged_in() && !zen_in_guest_checkout()) {
 ?>
 
-    <li><a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo HEADER_TITLE_LOGOFF; ?></a></li>
-    <?php if ($_SESSION['COWOA'] == false) { ?>
+    <li><a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo HEADER_TITLE_LOGOFF; ?></a></li>  
+    <?php if ($_SESSION['COWOA'] && $_SESSION['COWOA'] == false) { ?>
 <?php if ($_SESSION['cart']->count_contents() != 0) { ?>
     <li><a href="<?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>"><?php echo HEADER_TITLE_MY_ACCOUNT; ?></a></li>
 <?php } else { ?>

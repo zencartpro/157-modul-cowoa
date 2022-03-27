@@ -190,7 +190,7 @@ Dann nun alle Dateien/Ordner aus dem Ordner NEUE DATEIEN in der vorgegebenen Str
     &lt;li&gt;&lt;a href=&quot;&lt;?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?&gt;&quot;&gt;&lt;?php echo HEADER_TITLE_MY_ACCOUNT; ?&gt;&lt;/a&gt;&lt;/li&gt;</code><br>
   <br>
   Der Link darf für Kunden ohne Kundenkonto nicht angezeigt werden, daher wurde der entsprechende Eintrag von der mitgelieferten includes/templates/DEINTEMPLATE/common/tpl_header.php bereits geändert:</p>
-<code><p>&lt;?php if ($_SESSION['COWOA'] == false) { ?&gt;<br>
+<code><p>&lt;?php if ($_SESSION['COWOA'] &amp;&amp; $_SESSION['COWOA'] == false) { ?&gt;<br>
 &lt;li&gt;&lt;a href=&quot;&lt;?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?&gt;&quot;&gt;&lt;?php echo HEADER_TITLE_MY_ACCOUNT; ?&gt;&lt;/a&gt;&lt;/li&gt;<br>
 &lt;?php } ?&gt;</p></code>
 <p>In manchen alten Templates (z.B. viennaorange oder viennabright) befindet sich dieser Eintrag in:<br>
@@ -201,7 +201,7 @@ Dann nun alle Dateien/Ordner aus dem Ordner NEUE DATEIEN in der vorgegebenen Str
   Wenn Sie ein solches Template verwenden, dann eben dort ändern auf:</p>
 <code>
 <p>&lt;?php if ($_SESSION['customer_id']) { ?&gt;<br>
-&lt;?php if ($_SESSION['COWOA'] == false) { ?&gt;<br>
+&lt;?php if ($_SESSION['COWOA'] &amp;&amp; $_SESSION['COWOA'] == false) { ?&gt;<br>
 &lt;li class=&quot;&lt;?php echo $active;?&gt;&quot;&gt;&lt;a href=&quot;&lt;?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?&gt;&quot;&gt;&lt;?php echo TOP_MENU_MY_ACCOUNT;?&gt;&lt;/a&gt;&lt;/li&gt;<br>
 &lt;?php } ?&gt;<br>
 &lt;?php } ?&gt;</p>
@@ -289,7 +289,7 @@ Die Datei uninstall.sql im Ordner SQL mit einem Texteditor öffen und den Inhalt
 <h2>Download</h2>
 <p>Dieses Modul steht kostenlos auf Github zum Download bereit.</p>
 <p>Freigegebene getestete Versionen für den Einsatz in Livesystemen ausschließlich auf Github unter Releases herunterladen:<br>
-  <a href="https://github.com/zencartpro/157-modul-cowoa/releases" target="_blank">https://github.com/zencartpro/157-modul-cowoa/releases</a></p>
+  <a href="https://github.com/zencartpro/157-modul-cowoa/releases" target="_blank"><b>https://github.com/zencartpro/157-modul-cowoa/releases</b></a></p>
 
 
 </div>

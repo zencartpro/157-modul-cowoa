@@ -10,21 +10,19 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_orders_status_default.php 2022-02-19 18:11:16Z webchills $
+ * @version $Id: tpl_orders_status_default.php 2022-03-27 16:11:45Z webchills $
  */
 ?>
 <div class="centerColumn" id="accountHistInfo">
-
 <h1 id="orderHistoryHeading"><?php echo HEADING_TITLE; ?></h1><br />
 <?php
 if(isset($_POST['action']) && $_POST['action'] == "process") {
   if($errorInvalidID) echo ERROR_INVALID_ORDER;
   if($errorInvalidEmail) echo ERROR_INVALID_EMAIL;
-  if($errorNoMatch) echo ERROR_NO_MATCH; 
+  if(isset($errorNoMatch)) echo ERROR_NO_MATCH; 
 }?>
-<?php if($order) { ?>
 
-  
+<?php if(isset($order)) { ?>
   <h2 id="orderHistoryDetailedOrder"><?php echo HEADING_TITLE . ORDER_HEADING_DIVIDER . sprintf(HEADING_ORDER_NUMBER, zen_output_string_protected($_POST['order_id'])); ?></h2>
   <div class="forward"><?php echo HEADING_ORDER_DATE . ' ' . zen_date_long($order->info['date_purchased']); ?></div>
   <br class="clearBoth" />
