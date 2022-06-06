@@ -1,21 +1,21 @@
 <?php
 /**
  * Common Template - tpl_header.php
- * Zen Cart German Specific
- * this file can be copied to /templates/your_template_dir/pagename<br />
- * example: to override the privacy page<br />
- * make a directory /templates/my_template/privacy<br />
- * copy /templates/templates_defaults/common/tpl_footer.php to /templates/my_template/privacy/tpl_header.php<br />
- * to override the global settings and turn off the footer un-comment the following line:<br />
- * <br />
- * $flag_disable_header = true;<br />
  *
+ * this file can be copied to /templates/your_template_dir/pagename
+ * example: to override the privacy page
+ * make a directory /templates/my_template/privacy
+ * copy /templates/templates_defaults/common/tpl_footer.php to /templates/my_template/privacy/tpl_header.php
+ * to override the global settings and turn off the footer un-comment the following line:
+ * 
+ * $flag_disable_header = true;
+ * 
  
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_header.php for COWOA 2022-03-27 19:57:58Z webchills $
+ * @version $Id: tpl_header.php for COWOA 2022-06-06 20:57:58Z webchills $
  */
 ?>
 
@@ -67,7 +67,7 @@ if (!isset($flag_disable_header) || !$flag_disable_header) {
 <div id="navMainSearch">
   <?php require(DIR_WS_MODULES . zen_get_module_sidebox_directory('search_header.php')); ?>
 </div>
-<br class="clearBoth" />
+<br class="clearBoth">
 </div>
 <!--eof-navigation display-->
 
@@ -95,7 +95,7 @@ if (!isset($flag_disable_header) || !$flag_disable_header) {
     </div>
 <?php } // no HEADER_SALES_TEXT or SHOW_BANNERS_GROUP_SET2 ?>
 </div>
-<br class="clearBoth" />
+<br class="clearBoth">
 <!--eof-branding display-->
 
 <!--eof-header logo and navigation display-->

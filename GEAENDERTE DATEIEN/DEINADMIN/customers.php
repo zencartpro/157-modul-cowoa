@@ -5,7 +5,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: customers.php for COWOA 2022-02-19 15:11:51Z webchills $
+ * @version $Id: customers.php for COWOA 2022-06-06 20:44:51Z webchills $
  */
 require('includes/application_top.php');
 
@@ -468,7 +468,7 @@ if (zen_not_null($action)) {
             var customers_telephone = document.customers.customers_telephone.value;
 
   <?php if (ACCOUNT_GENDER == 'true') { ?>
-              if (document.customers.customers_gender[0].checked || document.customers.customers_gender[1].checked) {
+              if (document.customers.customers_gender[0].checked || document.customers.customers_gender[1].checked || document.customers.customers_gender[2].checked) {
               } else {
                   error_message = error_message + '<?php echo JS_GENDER; ?>';
                   error = 1;
@@ -1020,7 +1020,7 @@ if (zen_not_null($action)) {
           <fieldset>
             <legend><?php echo ADDRESS_BOOK_TITLE; ?></legend>
             <div class="alert forward"><?php echo sprintf(TEXT_MAXIMUM_ENTRIES, MAX_ADDRESS_BOOK_ENTRIES); ?></div>
-            <br class="clearBoth" />
+            <br class="clearBoth">
             <?php
             /**
              * Used to loop thru and display address book entries
@@ -1028,7 +1028,7 @@ if (zen_not_null($action)) {
             foreach ($addressArray as $addresses) {
               ?>
               <h3 class="addressBookDefaultName"><?php echo zen_output_string_protected($addresses['firstname'] . ' ' . $addresses['lastname']); ?><?php if ($addresses['address_book_id'] == zen_get_customers_address_primary($_GET['cID'])) echo '&nbsp;' . PRIMARY_ADDRESS; ?></h3>
-              <address><?php echo zen_address_format($addresses['format_id'], $addresses['address'], true, ' ', '<br />'); ?></address>
+              <address><?php echo zen_address_format($addresses['format_id'], $addresses['address'], true, ' ', '<br>'); ?></address>
 
               <br class="clearBoth">
             <?php } // end list ?>

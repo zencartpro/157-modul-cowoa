@@ -1,20 +1,21 @@
 <?php
 /**
  * Common Template - tpl_header.php
- * Zen Cart German Specific
- * this file can be copied to /templates/your_template_dir/pagename<br />
- * example: to override the privacy page<br />
- * make a directory /templates/my_template/privacy<br />
- * copy /templates/templates_defaults/common/tpl_footer.php to /templates/my_template/privacy/tpl_header.php<br />
- * to override the global settings and turn off the footer un-comment the following line:<br />
- * <br />
- * $flag_disable_header = true;<br />
+ *
+ * this file can be copied to /templates/your_template_dir/pagename
+ * example: to override the privacy page
+ * make a directory /templates/my_template/privacy
+ * copy /templates/templates_defaults/common/tpl_footer.php to /templates/my_template/privacy/tpl_header.php
+ * to override the global settings and turn off the footer un-comment the following line:
  * 
+ * $flag_disable_header = true;
+ *
+ 
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_header.php for COWOA 2022-03-27 16:31:58Z webchills $
+ * @version $Id: tpl_header.php for COWOA 2022-06-06 20:51:58Z webchills $
  */
 ?>
 
@@ -128,9 +129,9 @@ echo '<div class="header Fixed"><a href="#menu" title="Menu"><i class="fa fa-bar
 <?php if ($_SESSION['cart']->count_contents() != 0) { ?>
     <li><a class="navCartContentsIndicator" href="<?php echo zen_href_link(FILENAME_SHOPPING_CART, '', 'NONSSL'); ?>"><i class="fa fa-shopping-cart" title="Shopping Cart"></i> 
      <?php 
-        echo HEADER_TITLE_CART_CONTENTS;
-        // Alternatively, if you want to display cart quantity and value, use the following line instead of the one above. Adapt for multiple languages if relevant.
-        // echo $_SESSION['cart']->count_contents().' item(s) '. $currencies->format($_SESSION['cart']->show_total());
+     echo $_SESSION['cart']->count_contents().' '. HEADER_TITLE_CART_CONTENTS_PRODUCTS . ''. $currencies->format($_SESSION['cart']->show_total());
+        // Wenn Sie statt Artikelanzahl und Warenkorbwert ein fach nur das Wort Warenkorb anzeigen lassen wollen, kommentieren Sie die obere Zeile aus und entkommentieren die folgende.
+        // echo HEADER_TITLE_CART_CONTENTS;
      ?>
    </a>
     </li>
@@ -178,9 +179,10 @@ echo '<div class="header Fixed"><a href="#menu" title="Menu"><i class="fa fa-bar
     <li>
       <a class="navCartContentsIndicator" href="<?php echo zen_href_link(FILENAME_SHOPPING_CART, '', 'NONSSL'); ?>"><i class="fa fa-shopping-cart" title="Shopping Cart"></i>
      <?php 
-        echo HEADER_TITLE_CART_CONTENTS;
-        // Alternatively, if you want to display cart quantity and value, use the following line instead of the one above. Adapt for multiple languages if relevant.
-        // echo $_SESSION['cart']->count_contents().' item(s) '. $currencies->format($_SESSION['cart']->show_total());
+       echo $_SESSION['cart']->count_contents().' '. HEADER_TITLE_CART_CONTENTS_PRODUCTS . ''. $currencies->format($_SESSION['cart']->show_total());
+        // Wenn Sie statt Artikelanzahl und Warenkorbwert einfach nur das Wort Warenkorb anzeigen lassen wollen, kommentieren Sie die obere Zeile aus und entkommentieren die folgende.
+        // echo HEADER_TITLE_CART_CONTENTS;
+        
      ?>
    </a>
    </li>
