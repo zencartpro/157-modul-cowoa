@@ -1,11 +1,4 @@
 <?php
-/**
- * @package languageDefines
- * @copyright Copyright 2003-2010 Zen Cart Development Team
- * @copyright Portions Copyright 2003 osCommerce
- * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: order_status.php for COWOA 2.0 ZC139 2010-08-28 09:55:39Z webchills $
- */
 define('NAVBAR_TITLE', 'Bestellstatus');
 define('NAVBAR_TITLE_1', 'Bestellstatus einsehen');
 define('HEADING_TITLE', 'Bestellstatus einsehen');

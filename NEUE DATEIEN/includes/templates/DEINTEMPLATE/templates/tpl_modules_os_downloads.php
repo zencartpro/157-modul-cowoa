@@ -1,13 +1,12 @@
 <?php
 /**
- * Page Template
- *
- * @package templateSystem
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ * @package Bestellen ohne Kundenkonto (COWOA)
+ * Zen Cart German Specific
+ * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_modules_os_downloads.php 2018-04-01 10:49:16Z webchills $
- * require the downloads module
+ * @version $Id: tpl_modules_os_downloads.php 2022-06-10 16:55:16Z webchills $
  */
   require(DIR_WS_MODULES . zen_get_module_directory('os_downloads.php'));
 ?>

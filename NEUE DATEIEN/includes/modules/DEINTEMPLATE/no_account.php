@@ -1,13 +1,12 @@
 <?php
 /**
+ * @package Bestellen ohne Kundenkonto (COWOA)
  * Zen Cart German Specific
- * no_account header_php.php
- *
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: no_account.php 2022-06-10 15:34:40Z webchills $
+ * @version $Id: no_account.php 2022-06-10 16:55:16Z webchills $
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_MODULE_START_NO_ACCOUNT');

@@ -1,16 +1,12 @@
 <?php
 /**
+ * @package Bestellen ohne Kundenkonto (COWOA)
  * Zen Cart German Specific
- * Page Template
- *
- * Loaded automatically by index.php?main_page=account_edit.<br />
- * Displays information related to a single specific order
- * 
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_orders_status_default.php 2022-03-27 16:11:45Z webchills $
+ * @version $Id: tpl_order_status_default.php 2022-06-10 16:55:16Z webchills $
  */
 ?>
 <div class="centerColumn" id="accountHistInfo">

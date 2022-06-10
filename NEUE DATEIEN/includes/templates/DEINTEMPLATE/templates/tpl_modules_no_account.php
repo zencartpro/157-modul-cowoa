@@ -1,15 +1,12 @@
 <?php
 /**
- * Page Template
+ * @package Bestellen ohne Kundenkonto (COWOA)
  * Zen Cart German Specific
- * Loaded automatically by index.php?main_page=no_account.
- * Displays Create Account form for COWOA accounts.
- * 
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_modules_no_account.php 2022-06-10 16:50:16Z webchills $
+ * @version $Id: tpl_modules_no_account.php 2022-06-10 16:55:16Z webchills $
  */
 ?>
 

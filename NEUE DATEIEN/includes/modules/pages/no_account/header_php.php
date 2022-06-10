@@ -1,13 +1,12 @@
 <?php
 /**
- * no_account header_php.php
- *
- * @package page
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ * @package Bestellen ohne Kundenkonto (COWOA)
+ * Zen Cart German Specific
+ * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
- * @copyright Portions Copyright 2007 J_Schilz
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: header_php.php 2019-07-04 07:19:00 webchills
+ * @version $Id: header_php.php 2022-06-10 16:55:16Z webchills $
  */
 
 // This should be first line of the script:

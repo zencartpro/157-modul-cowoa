@@ -1,13 +1,4 @@
 <?php
-/**
- * @package languageDefines
- * @copyright Copyright 2003-2010 Zen Cart Development Team
- * @copyright Portions Copyright Joseph Schilz
- * @copyright Portions Copyright 2003 osCommerce
- * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: no_account.php for COWOA 2.0 ZC139 2010-10-27 09:55:39Z webchills $
- */
-
 define('NAVBAR_TITLE', 'Rechnungsinformation');
 
 define('HEADING_TITLE', 'Schritt 1 von 4 - Rechnungsinformation');
@@ -48,4 +39,3 @@ define('TABLE_HEADING_CONTACT_DETAILS', 'Kontakt Details');
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Weiter zu Schritt 2');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', '- teilen Sie uns Ihre Lieferadresse mit.');
-
