@@ -1,13 +1,13 @@
 <?php
 /**
  * Zen Cart German Specific
- * no_account.php
+ * no_account header_php.php
  *
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: no_account.php for COWOA 2022-02-19 15:58:40Z webchills $
+ * @version $Id: no_account.php 2022-06-10 15:34:40Z webchills $
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_MODULE_START_NO_ACCOUNT');
@@ -27,13 +27,17 @@ if (!defined('IS_ADMIN_FLAG')) {
   $error = false;
   $email_format = (ACCOUNT_EMAIL_PREFERENCE == '1' ? 'HTML' : 'TEXT');
   $newsletter = (ACCOUNT_NEWSLETTER_STATUS == '1' || ACCOUNT_NEWSLETTER_STATUS == '0' ? false : true);
+  $antiSpamFieldName = isset($_SESSION['antispam_fieldname']) ? $_SESSION['antispam_fieldname'] : 'should_be_empty';
 /**
  * Process form contents
  */
 if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   $process = true;
-  
-  
+  $antiSpam = !empty($_POST[$antiSpamFieldName]) ? 'spam' : '';
+  if (!empty($_POST['firstname']) && preg_match('~https?://?~', $_POST['firstname'])) $antiSpam = 'spam';
+  if (!empty($_POST['lastname']) && preg_match('~https?://?~', $_POST['lastname'])) $antiSpam = 'spam';
+
+  $zco_notifier->notify('NOTIFY_NO_ACCOUNT_CAPTCHA_CHECK');
   
      if (ACCOUNT_GENDER == 'true') {
     if (isset($_POST['gender'])) {
@@ -331,6 +335,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     }
 
     $_SESSION['customer_first_name'] = $firstname;
+    $_SESSION['customer_last_name'] = $lastname;
     $_SESSION['customer_default_address_id'] = $address_id;
     $_SESSION['customer_country_id'] = $country;
     $_SESSION['customer_zone_id'] = $zone_id;

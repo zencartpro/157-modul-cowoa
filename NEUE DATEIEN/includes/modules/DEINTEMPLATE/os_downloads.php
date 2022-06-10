@@ -1,12 +1,11 @@
 <?php
 /**
- * order_status downloads module - prepares information for use in downloadable files delivery
- *
- * @package modules
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ *  
+ * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: os_downloads.php 1.0 Modified from downloads.php 2010-07-02 21:04:04Z JT of GTI Custom 
+ * @version $Id: no_account.php 2022-06-10 15:34:40Z webchills $
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -38,4 +37,3 @@ TABLE_ORDERS_PRODUCTS_DOWNLOAD . " opd
                           and o.orders_id = '" . (int)$last_order . "'
                           and opd.orders_products_filename != ''
                           ");
-?>

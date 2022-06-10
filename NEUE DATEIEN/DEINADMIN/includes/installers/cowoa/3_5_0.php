@@ -1,10 +1,10 @@
 <?php
 /**
  * @package Bestellen ohne Kundenkonto (COWOA)
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ * @copyright Copyright 2003-2022 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: 3_5_0.php  2019-07-20 16:13:51Z webchills $
+ * @version $Id: 3_5_0.php  2022-06-10 16:33:51Z webchills $
  */
  
 $db->Execute(" SELECT @gid:=configuration_group_id
@@ -33,12 +33,12 @@ $db->Execute("REPLACE INTO ".TABLE_CONFIGURATION_LANGUAGE." (configuration_title
     }
     
 //check if COWOA_order column already exists - if not add it
-    $sql ="SHOW COLUMNS FROM ".TABLE_ORDERS." LIKE 'COWOA_order'";
-    $result = $db->Execute($sql);
-    if(!$result->RecordCount())
+    $sql2 ="SHOW COLUMNS FROM ".TABLE_ORDERS." LIKE 'COWOA_order'";
+    $result2 = $db->Execute($sql2);
+    if(!$result2->RecordCount())
     {
-        $sql = "ALTER TABLE ".TABLE_ORDERS." ADD COWOA_order tinyint(1) NOT NULL default 0";
-        $db->Execute($sql);
+        $sql2 = "ALTER TABLE ".TABLE_ORDERS." ADD COWOA_order tinyint(1) NOT NULL default 0";
+        $db->Execute($sql2);
     }
 
 $db->Execute("INSERT IGNORE INTO ".TABLE_QUERY_BUILDER." (query_id , query_category , query_name , query_description , query_string ) VALUES ( '', 'email,newsletters', 'Permanent Account Holders Only', 'Send email only to permanent account holders ', 'select customers_email_address, customers_firstname, customers_lastname from TABLE_CUSTOMERS where COWOA_account != 1 order by customers_lastname, customers_firstname, customers_email_address')");
