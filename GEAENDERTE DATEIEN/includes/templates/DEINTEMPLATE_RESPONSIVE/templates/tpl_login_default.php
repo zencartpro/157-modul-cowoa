@@ -2,12 +2,12 @@
 /**
  * Page Template
  * Zen Cart German Specific
- * @package templateSystem
+ 
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_login_default.php for COWOA 2022-06-06 20:48:16Z webchills $
+ * @version $Id: tpl_login_default.php for COWOA 2022-11-26 09:48:16Z webchills $
  */
 ?>
 <div class="centerColumn" id="loginDefault">
@@ -42,7 +42,7 @@
             <label class="inputLabel" for="login-password"><?php echo ENTRY_PASSWORD; ?></label>
             <?php echo zen_draw_password_field('password', '', 'size="18" id="login-password" autocomplete="current-password" placeholder="' . ENTRY_REQUIRED_SYMBOL . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
             <br class="clearBoth"/>
-
+            <?php echo zen_draw_input_field('empadminlogin', '', 'size="18" id="empadminlogin" style="visibility:hidden; display:none;" autocomplete="off"'); ?>
             <div class="buttonRow forward"><?php echo zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT); ?></div>
             <div class="buttonRow back important"><?php echo '<a href="' . zen_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></div>
             <?php echo '</form>'; ?>
@@ -95,6 +95,7 @@
             <?php echo zen_draw_password_field('password', '', zen_set_field_length(TABLE_CUSTOMERS, 'customers_password', 40) . ' id="login-password" autocomplete="current-password" placeholder="' . ENTRY_REQUIRED_SYMBOL . '"' . ((int)ENTRY_PASSWORD_MIN_LENGTH > 0 ? ' required' : '')); ?>
             <br class="clearBoth"/>
             <?php echo zen_draw_hidden_field('securityToken', $_SESSION['securityToken']); ?>
+            <?php echo zen_draw_input_field('empadminlogin', '', 'size="18" id="empadminlogin" style="visibility:hidden; display:none;" autocomplete="off"'); ?>
         </fieldset>
 
         <div class="buttonRow forward"><?php echo zen_image_submit(BUTTON_IMAGE_LOGIN, BUTTON_LOGIN_ALT); ?></div>

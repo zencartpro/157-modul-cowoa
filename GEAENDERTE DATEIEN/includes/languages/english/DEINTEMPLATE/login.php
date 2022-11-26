@@ -7,7 +7,7 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
  
- * @version $Id: login.php for COWOA 2022-02-19 15:42:40Z webchills $
+ * @version $Id: login.php for COWOA 2022-11-26 09:42:40Z webchills $
  */
 
 define('NAVBAR_TITLE', 'Login');
@@ -18,7 +18,7 @@ define('HEADING_NEW_CUSTOMER_SPLIT', 'New Customers');
 
 define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Create a customer profile with <strong>' . STORE_NAME . '</strong> which allows you to shop faster, track the status of your current orders and review your previous orders.');
 define('TEXT_NEW_CUSTOMER_INTRODUCTION_SPLIT', 'Have a PayPal account? Want to pay quickly with a credit card? Use the PayPal button below to use the Express Checkout option.');
-define('TEXT_NEW_CUSTOMER_POST_INTRODUCTION_DIVIDER', '<span class="larger">Or</span><br />');
+define('TEXT_NEW_CUSTOMER_POST_INTRODUCTION_DIVIDER', '<span class="larger">Or</span><br>');
 define('TEXT_NEW_CUSTOMER_POST_INTRODUCTION_SPLIT', 'Create a Customer Profile with <strong>' . STORE_NAME . '</strong> which allows you to shop faster, track the status of your current orders, review your previous orders and take advantage of our other member\'s benefits.');
 
 define('HEADING_RETURNING_CUSTOMER', 'Returning Customers: Please Log In');

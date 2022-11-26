@@ -7,7 +7,7 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
  
- * @version $Id: login.php for COWOA 2022-02-19 15:42:40Z webchills $
+ * @version $Id: login.php for COWOA 2022-11-26 09:42:40Z webchills $
  */
 
 define('NAVBAR_TITLE','Anmelden');
@@ -18,7 +18,7 @@ define('HEADING_NEW_CUSTOMER_SPLIT', 'Neukunden');
 
 define('TEXT_NEW_CUSTOMER_INTRODUCTION','Ein Kundenkonto bei ' . STORE_NAME . ' ermöglicht Ihnen z.B. komfortabel einzukaufen, sich Ihre aktuellen und bisherigen Bestellungen anzusehen u.v.m.');
 define('TEXT_NEW_CUSTOMER_INTRODUCTION_SPLIT', 'Haben Sie ein PayPal Konto? Sie möchten mit einer Kreditkarte schnell zahlen? Klicken Sie auf den PayPal Button unten, um die Option "Paypal Express" zu verwenden.');
-define('TEXT_NEW_CUSTOMER_POST_INTRODUCTION_DIVIDER', '<span class="larger">oder</span><br />');
+define('TEXT_NEW_CUSTOMER_POST_INTRODUCTION_DIVIDER', '<span class="larger">oder</span><br>');
 define('TEXT_NEW_CUSTOMER_POST_INTRODUCTION_SPLIT', 'Ein Kundenkonto bei ' . STORE_NAME . ' ermöglicht Ihnen z.B. komfortabel einzukaufen, sich Ihre aktuellen und bisherigen Bestellungen anzusehen sowie alle Vorteile zu nutzen, die Kunden vorbehalten sind.');
 
 define('HEADING_RETURNING_CUSTOMER','Stammkunden: Bitte melden Sie sich an');

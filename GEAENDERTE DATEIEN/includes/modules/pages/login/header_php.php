@@ -1,13 +1,12 @@
 <?php
 /**
  * Login Page
- *
- 
+ * Zen Cart German Specific 
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: header_php.php for COWOA 2022-02-19 15:36:16Z webchills $
+ * @version $Id: header_php.php for COWOA 2022-11-26 09:36:16Z webchills $
  */
 
 // This should be first line of the script:
@@ -19,8 +18,8 @@ if ($session_started == false) {
   zen_redirect(zen_href_link(FILENAME_COOKIE_USAGE));
 }
 
-// if the customer is logged in already (and not in guest-checkout), redirect them to the My account page
-if (!zen_in_guest_checkout() && zen_is_logged_in()) {
+// if the customer is logged in already, not in guest-checkout, and not a new EMP Automatic Login, redirect them to the My account page
+if (!zen_in_guest_checkout() && zen_is_logged_in() && !isset($_GET['hmac'])) {
     zen_redirect(zen_href_link(FILENAME_ACCOUNT, '', 'SSL'));
 }
 
@@ -30,9 +29,10 @@ include(DIR_WS_MODULES . zen_get_module_directory(FILENAME_CREATE_ACCOUNT));
 // -----
 // Gather any posted email_address prior to the processing loop, in case this is a 'Place Order'
 // request coming from the admin.
+// Also get the empty value of the hidden empadminlogin field to fill it with allowed if the place order button in admin is used
 //
 $email_address = zen_db_prepare_input(isset($_POST['email_address']) ? trim($_POST['email_address']) : '');
-
+$empadminlogin = zen_db_prepare_input(isset($_POST['empadminlogin']) ? trim($_POST['empadminlogin']) : '');
 $error = false;
 if (isset($_GET['action']) && $_GET['action'] == 'process') {
     $loginAuthorized = false;
@@ -89,7 +89,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'process') {
                   $newPassword = zcPassword::getInstance(PHP_VERSION)->updateNotLoggedInCustomerPassword(
                       $password, $email_address);
               }
-          } else {
+           // login with admin password for place order is only possible when started from admin for security reasons
+          } else if (!empty($_POST['empadminlogin'])){
               $loginAuthorized = zen_validate_storefront_admin_login($password, $email_address);
           }
       }
@@ -169,9 +170,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'process') {
             }
           }
         }
-        // eof: contents merge notice
+        // end contents merge notice
 
-        if (sizeof($_SESSION['navigation']->snapshot) > 0) {
+        if (count($_SESSION['navigation']->snapshot) > 0) {
           //    $back = sizeof($_SESSION['navigation']->path)-2;
           $origin_href = zen_href_link($_SESSION['navigation']->snapshot['page'], zen_array_to_string($_SESSION['navigation']->snapshot['get'], array(zen_session_name())), $_SESSION['navigation']->snapshot['mode']);
           //            $origin_href = zen_back_link_only(true);

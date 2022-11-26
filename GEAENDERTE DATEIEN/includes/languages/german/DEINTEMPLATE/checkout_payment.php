@@ -6,7 +6,7 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
  
- * @version $Id: checkout_payment.php for COWOA 2022-02-19 15:39:14Z webchills $
+ * @version $Id: checkout_payment.php for COWOA 2022-11-26 09:39:14Z webchills $
  */
 
 define('NAVBAR_TITLE_1', 'Bestellung - Schritt 2');
@@ -28,7 +28,7 @@ define('TEXT_SELECT_PAYMENT_METHOD', 'Bitte wählen Sie eine Zahlungsart für di
 define('TITLE_PLEASE_SELECT', 'Bitte wählen Sie');
 define('TABLE_HEADING_COMMENTS', 'Anmerkungen oder Hinweise');
 
-define('TEXT_NO_PAYMENT_OPTIONS_AVAILABLE','<span class="alert">Entschuldigung, aber wir können Zahlungen aus Ihrer Region nicht annehmen .</span><br />Bitte setzen Sie sich mit uns in Verbindung, um Alternativen zu suchen. ');
+define('TEXT_NO_PAYMENT_OPTIONS_AVAILABLE','<span class="alert">Entschuldigung, aber wir können Zahlungen aus Ihrer Region nicht annehmen .</span><br>Bitte setzen Sie sich mit uns in Verbindung, um Alternativen zu suchen. ');
 
 if($COWOA)
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', '<strong>Weiter zu Schritt 4</strong>');

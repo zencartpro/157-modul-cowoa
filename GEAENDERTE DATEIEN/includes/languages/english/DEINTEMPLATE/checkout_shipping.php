@@ -6,7 +6,7 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
  
- * @version $Id: checkout_shipping.php for COWOA 2022-02-19 15:41:40Z webchills $
+ * @version $Id: checkout_shipping.php for COWOA 2022-11-26 09:41:40Z webchills $
  */
 define('NAVBAR_TITLE_1', 'Checkout');
 define('NAVBAR_TITLE_2', 'Shipping Method');
@@ -29,7 +29,7 @@ define('TEXT_CHOOSE_SHIPPING_METHOD', 'Please select the preferred shipping meth
 define('TITLE_PLEASE_SELECT', 'Please Select');
 define('TEXT_ENTER_SHIPPING_INFORMATION', 'This is currently the only shipping method available to use on this order.');
 define('TITLE_NO_SHIPPING_AVAILABLE', 'Not Available At This Time');
-define('TEXT_NO_SHIPPING_AVAILABLE','<span class="alert">Sorry, we are not shipping to your region at this time.</span><br />Please contact us for alternate arrangements.');
+define('TEXT_NO_SHIPPING_AVAILABLE','<span class="alert">Sorry, we are not shipping to your region at this time.</span><br>Please contact us for alternate arrangements.');
 
 define('TABLE_HEADING_COMMENTS', 'Special Instructions or Comments About Your Order');
 

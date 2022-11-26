@@ -6,7 +6,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: checkout_process.php for COWOA 2022-02-19 15:40:14Z webchills $
+ * @version $Id: checkout_process.php for COWOA 2022-11-26 09:40:14Z webchills $
  */
 
 define('EMAIL_TEXT_SUBJECT', 'Order Confirmation');
@@ -20,12 +20,12 @@ if($_SESSION['COWOA']) $COWOA=TRUE;
 if($COWOA)
 define('EMAIL_TEXT_INVOICE_URL', 'Check order status:');
 else
-define('EMAIL_TEXT_INVOICE_URL', 'Detailed Invoice:');
+define('EMAIL_TEXT_INVOICE_URL', 'Order Details:');
 
 if($COWOA)
 define('EMAIL_TEXT_INVOICE_URL_CLICK', 'Click here to check the status of your order');
 else
-define('EMAIL_TEXT_INVOICE_URL_CLICK', 'Click here for a Detailed Invoice');
+define('EMAIL_TEXT_INVOICE_URL_CLICK', 'Click here for Order Details');
 define('EMAIL_TEXT_DATE_ORDERED', 'Date Ordered:');
 define('EMAIL_TEXT_PRODUCTS', 'Products');
 define('EMAIL_TEXT_DELIVERY_ADDRESS', 'Delivery Address');
