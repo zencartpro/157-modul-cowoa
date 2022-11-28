@@ -6,18 +6,20 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: checkout_confirmation.php for COWOA 2022-11-26 09:05:14Z webchills $
+ * @version $Id: checkout_confirmation.php for COWOA 2022-11-28 15:58:14Z webchills $
  */
+
+// cowoa do not change
+if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true) {
+define('HEADING_TITLE', 'Schritt 4 von 4 : Zahlungspflichtig bestellen');
+} else {
+define('HEADING_TITLE', 'Schritt 3 von 3 : Zahlungspflichtig bestellen');
+}
+
+// ab hier koennen Sie falls noetig Anpassungen vornehmen, die Definitionen weiter oben NIE aendern!
 
 define('NAVBAR_TITLE_1','Bestellung');
 define('NAVBAR_TITLE_2','Bestellung bestätigen');
-
-if($_SESSION['COWOA']) $COWOA=TRUE;
-
-if($COWOA)
-	define('HEADING_TITLE', 'Schritt 4 von 4 : Zahlungspflichtig bestellen');
-else
-	define('HEADING_TITLE', 'Schritt 3 von 3 : Zahlungspflichtig bestellen');
 define('TEXT_ZUSATZ_SCHRITT3','Überprüfen Sie Ihre Bestellung und drücken dann den Button "KAUFEN" unten auf dieser Seite.');
 define('BRAINTREE_MESSAGE_PLEASE_CONFIRM_ORDER', '<b>Ihre Kreditkarte wurde erfolgreich verifiziert, es hat aber noch keine Zahlung stattgefunden. Bitte bestätigen Sie nun Ihre Bestellung mit dem Button unten. Erst dann werden Zahlung und Bestellung durchgeführt.</b>');
 define('HEADING_BILLING_ADDRESS','Rechnungsanschrift');

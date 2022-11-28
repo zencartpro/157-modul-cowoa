@@ -6,19 +6,22 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
  
- * @version $Id: checkout_shipping.php for COWOA 2022-11-26 09:41:40Z webchills $
+ * @version $Id: checkout_shipping.php for COWOA 2022-11-28 16:41:40Z webchills $
  */
+ 
+// cowoa do not change
+if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true) {
+define('HEADING_TITLE', 'Step 2 of 4 - Delivery Information');
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue to Step 3');
+} else {
+define('HEADING_TITLE', 'Step 1 of 3 - Delivery Information');	
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue to Step 2');
+}
+
+// ab hier koennen Sie falls noetig Anpassungen vornehmen, die Definitionen weiter oben NIE aendern!
+
 define('NAVBAR_TITLE_1', 'Checkout');
 define('NAVBAR_TITLE_2', 'Shipping Method');
-if($_SESSION['COWOA']) $COWOA=TRUE;
-
-
-
-if($COWOA)
-define('HEADING_TITLE', 'Step 2 of 4 - Delivery Information');
-else
-define('HEADING_TITLE', 'Step 1 of 3 - Delivery Information');
-
 
 define('TABLE_HEADING_SHIPPING_ADDRESS', 'Shipping Address');
 define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Your order will be shipped to the address at the left or you may change the shipping address by clicking the <em>Change Address</em> button.');
@@ -33,10 +36,6 @@ define('TEXT_NO_SHIPPING_AVAILABLE','<span class="alert">Sorry, we are not shipp
 
 define('TABLE_HEADING_COMMENTS', 'Special Instructions or Comments About Your Order');
 
-if($COWOA)
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue to Step 3');
-else
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue to Step 2');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', '- choose your payment method.');
 
 // when free shipping for orders over $XX.00 is active
