@@ -10,7 +10,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_checkout_success_default.php for COWOA 2022-06-06 20:47:39Z webchills $
+ * @version $Id: tpl_checkout_success_default.php for COWOA 2022-11-28 16:42:39Z webchills $
  */
 ?>
 <div class="centerColumn" id="checkoutSuccess">
@@ -54,7 +54,7 @@ if (isset($additional_payment_messages) && $additional_payment_messages != '') {
 <!--Kill session if COWOA customer at checkout success-->
 <div id="checkoutSuccessLogoff">
 <?php
-if ($_SESSION['COWOA'] and COWOA_LOGOFF == 'true') {
+if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true && COWOA_LOGOFF == 'true') {
   zen_session_destroy();
 } else {
   if (isset($_SESSION['customer_guest_id'])) {
@@ -90,7 +90,7 @@ require($template->get_template_dir('tpl_account_history_info_default.php',DIR_W
  * The following creates a list of checkboxes for the customer to select if they wish to be included in product-notification
  * announcements related to products they've just purchased.
  **/
-    if ($flag_show_products_notification == true && !($_SESSION['COWOA'])) {
+    if ($flag_show_products_notification == true && !isset ($_SESSION['COWOA'])) {
 ?>
 <fieldset id="csNotifications">
 <legend><?php echo TEXT_NOTIFY_PRODUCTS; ?></legend>

@@ -16,6 +16,8 @@ define('HEADING_TOTAL', 'Total');
 define('HEADING_QUANTITY', 'Qty.');
 
 define('HEADING_SHIPPING_METHOD', 'Shipping Method');
+define('HEADING_DELIVERY_ADDRESS', 'Shipping Address');
+define('HEADING_BILLING_ADDRESS', 'Payment Address');
 define('HEADING_PAYMENT_METHOD', 'Payment Method');
 
 define('HEADING_ORDER_HISTORY', 'Status History &amp; Comments');
