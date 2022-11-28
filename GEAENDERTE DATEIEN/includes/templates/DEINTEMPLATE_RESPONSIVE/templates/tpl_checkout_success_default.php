@@ -10,7 +10,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_checkout_success_default.php for COWOA 2022-11-28 16:42:39Z webchills $
+ * @version $Id: tpl_checkout_success_default.php for COWOA 2022-11-28 18:02:39Z webchills $
  */
 ?>
 <div class="centerColumn" id="checkoutSuccess">
@@ -66,7 +66,7 @@ if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true && COWOA_LOGOFF == '
 </div>
 <div class="buttonRow forward">
     <a href="<?php echo zen_href_link(FILENAME_CONTACT_US, '', 'SSL'); ?>" id="linkContactUs"><?php echo zen_image_button(BUTTON_IMAGE_CONTACT_US , BUTTON_CONTACT_US_TEXT); ?></a>
-    <?php if(!($_SESSION['COWOA'])) { ?>
+    <?php if(!isset($_SESSION['COWOA'])) { ?>
     <a href="<?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>" id="linkMyAccount"><?php echo zen_image_button(BUTTON_IMAGE_MY_ORDERS , BUTTON_MY_ORDERS_TEXT); ?></a>
     <?php } ?>
     <a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>" id="linkLogoff"><?php echo zen_image_button(BUTTON_IMAGE_LOG_OFF , BUTTON_LOG_OFF_ALT); ?></a>

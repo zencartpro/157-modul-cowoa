@@ -10,7 +10,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_checkout_success_default.php for COWOA 2022-06-06 20:49:39Z webchills $
+ * @version $Id: tpl_checkout_success_default.php for COWOA 2022-11-28 18:03:39Z webchills $
  */
 ?>
 <div class="centerColumn" id="checkoutSuccess">
@@ -54,7 +54,7 @@ if (isset($additional_payment_messages) && $additional_payment_messages != '') {
 <!--Kill session if COWOA customer at checkout success-->
 <div id="checkoutSuccessLogoff">
 <?php
-if ($_SESSION['COWOA'] and COWOA_LOGOFF == 'true') {
+if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true && COWOA_LOGOFF == 'true') {
   zen_session_destroy();
 } else {
   if (isset($_SESSION['customer_guest_id'])) {
@@ -66,7 +66,7 @@ if ($_SESSION['COWOA'] and COWOA_LOGOFF == 'true') {
 </div>
 <div class="buttonRow forward">
     <a href="<?php echo zen_href_link(FILENAME_CONTACT_US, '', 'SSL'); ?>" id="linkContactUs"><?php echo zen_image_button(BUTTON_IMAGE_CONTACT_US , BUTTON_CONTACT_US_TEXT); ?></a>
-    <?php if(!($_SESSION['COWOA'])) { ?>
+    <?php if(!isset($_SESSION['COWOA'])) { ?>
     <a href="<?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>" id="linkMyAccount"><?php echo zen_image_button(BUTTON_IMAGE_MY_ORDERS , BUTTON_MY_ORDERS_TEXT); ?></a>
     <?php } ?>
     <a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>" id="linkLogoff"><?php echo zen_image_button(BUTTON_IMAGE_LOG_OFF , BUTTON_LOG_OFF_ALT); ?></a>
@@ -90,7 +90,7 @@ require($template->get_template_dir('tpl_account_history_info_default.php',DIR_W
  * The following creates a list of checkboxes for the customer to select if they wish to be included in product-notification
  * announcements related to products they've just purchased.
  **/
-    if ($flag_show_products_notification == true && !($_SESSION['COWOA'])) {
+    if ($flag_show_products_notification == true && !isset ($_SESSION['COWOA'])) {
 ?>
 <fieldset id="csNotifications">
 <legend><?php echo TEXT_NOTIFY_PRODUCTS; ?></legend>

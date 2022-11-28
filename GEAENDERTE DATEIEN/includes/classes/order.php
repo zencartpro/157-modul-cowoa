@@ -4,7 +4,7 @@
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: order.php for COWOA 2022-11-26 09:23:03Z webchills $
+ * @version $Id: order.php for COWOA 2022-11-28 18:01:03Z webchills $
  */
 /**
  * order class
@@ -1079,7 +1079,7 @@ class order extends base {
     $html_msg=array();
     // COWOA:If COWOA and Send Order Status is True     
 
-    if ($_SESSION['COWOA'] && (COWOA_ORDER_STATUS == 'true'))  {
+    if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true && COWOA_ORDER_STATUS == 'true') {    
     $htmlInvoiceURL=EMAIL_TEXT_INVOICE_URL_CLICK;;
     $htmlInvoiceValue=zen_href_link(FILENAME_ORDER_STATUS, 'order_id=' . $zf_insert_id, 'SSL', false);
     $email_order = EMAIL_TEXT_HEADER . EMAIL_TEXT_FROM . STORE_NAME . "\n\n";
@@ -1113,7 +1113,7 @@ class order extends base {
     }
     
     // COWOA:If COWOA but Send Order Status is False
-    if ($_SESSION['COWOA'] && (COWOA_ORDER_STATUS == 'false')){
+   if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true && COWOA_ORDER_STATUS == 'false') {    
     $htmlInvoiceURL='';
     $htmlInvoiceValue='';
    $email_order = EMAIL_TEXT_HEADER . EMAIL_TEXT_FROM . STORE_NAME . "\n\n";
@@ -1147,7 +1147,7 @@ class order extends base {
     
      // NO COWOA, so lets set up the Text and HTML E-mail Information for the Order History Info
      
-     if (!$_SESSION['COWOA']){  
+     if (!isset($_SESSION['COWOA'])){  
       $invoiceInfo=EMAIL_TEXT_INVOICE_URL . ' ' . zen_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $zf_insert_id, 'SSL', false) . "\n\n";
       $htmlInvoiceURL=EMAIL_TEXT_INVOICE_URL_CLICK;;
       $htmlInvoiceValue=zen_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $zf_insert_id, 'SSL', false);
