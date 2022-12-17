@@ -5,7 +5,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: customers_without_order.php for COWOA 2022-06-06 20:45:51Z webchills $
+ * @version $Id: customers_without_order.php for COWOA 2022-12-17 18:45:51Z webchills $
  */
 require('includes/application_top.php');
 

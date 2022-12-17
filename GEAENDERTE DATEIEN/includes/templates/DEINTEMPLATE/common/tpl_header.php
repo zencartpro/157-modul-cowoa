@@ -10,12 +10,12 @@
  * 
  * $flag_disable_header = true;
  * 
- 
+ * Zen Cart German Specific (158 code in 157)
  * @copyright Copyright 2003-2022 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_header.php for COWOA 2022-06-06 20:57:58Z webchills $
+ * @version $Id: tpl_header.php for COWOA 2022-12-17 19:13:58Z webchills $
  */
 ?>
 
@@ -24,10 +24,10 @@
   if ($messageStack->size('header') > 0) {
     echo $messageStack->output('header');
   }
-  if (isset($_GET['error_message']) && zen_not_null($_GET['error_message'])) {
+  if (!empty($_GET['error_message'])) {
     echo zen_output_string_protected(urldecode($_GET['error_message']));
   }
-  if (isset($_GET['info_message']) && zen_not_null($_GET['info_message'])) {
+  if (!empty($_GET['info_message'])) {
    echo zen_output_string_protected($_GET['info_message']);
   }
 ?>
@@ -48,7 +48,7 @@ if (!isset($flag_disable_header) || !$flag_disable_header) {
     if (zen_is_logged_in() && !zen_in_guest_checkout()) {
 ?>
     <li><a href="<?php echo zen_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo HEADER_TITLE_LOGOFF; ?></a></li>
-    <?php if ($_SESSION['COWOA'] && $_SESSION['COWOA'] == false) { ?>
+<?php if (!isset ($_SESSION['COWOA'])){ ?>
     <li><a href="<?php echo zen_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>"><?php echo HEADER_TITLE_MY_ACCOUNT; ?></a></li>
     <?php } ?>
 <?php

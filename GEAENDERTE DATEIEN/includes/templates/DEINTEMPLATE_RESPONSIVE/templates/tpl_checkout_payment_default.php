@@ -9,7 +9,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_checkout_payment_default.php for COWOA 2022-11-26 09:52:42Z webchills $
+ * @version $Id: tpl_checkout_payment_default.php for COWOA 2022-12-17 18:22:42Z webchills $
  */
 ?>
 <?php echo $payment_modules->javascript_validation(); ?>
@@ -67,7 +67,7 @@
       }
       for ($j=0, $n2=(isset($selection[$i]['fields']) ? sizeof($selection[$i]['fields']) : 0); $j<$n2; $j++) {
 ?>
-<?php if(!($COWOA)) {?>
+<?php if(!isset($_SESSION['COWOA'])) { ?>
 <fieldset>
 <legend><?php echo $selection[$i]['module']; ?></legend>
 <?php echo $selection[$i]['redeem_instructions']; ?>
