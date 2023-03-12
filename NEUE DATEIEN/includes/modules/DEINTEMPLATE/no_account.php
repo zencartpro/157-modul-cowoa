@@ -2,11 +2,11 @@
 /**
  * @package Bestellen ohne Kundenkonto (COWOA)
  * Zen Cart German Specific
- * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: no_account.php 2022-06-10 16:55:16Z webchills $
+ * @version $Id: no_account.php 2023-03-12 13:19:16Z webchills $
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_MODULE_START_NO_ACCOUNT');
@@ -51,7 +51,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   $firstname = zen_db_prepare_input(zen_sanitize_string($_POST['firstname']));
   $lastname = zen_db_prepare_input(zen_sanitize_string($_POST['lastname']));
   $nick = (isset($_POST['nick']) ? zen_db_prepare_input($_POST['nick']) : '');
-  if (ACCOUNT_DOB == 'true') $dob = zen_db_prepare_input($_POST['dob']);
+  if (ACCOUNT_DOB == 'true') $dob = (isset($_POST['dob']) ? zen_db_prepare_input($_POST['dob']) : ''); 
  
   
   $street_address = zen_db_prepare_input($_POST['street_address']);
