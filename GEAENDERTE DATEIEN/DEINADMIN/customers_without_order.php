@@ -1,11 +1,11 @@
 <?php
 /** 
  * Zen Cart German Specific
- * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: customers_without_order.php for COWOA 2022-12-17 18:45:51Z webchills $
+ * @version $Id: customers_without_order.php for COWOA 2023-04-08 18:42:51Z webchills $
  */
 require('includes/application_top.php');
 
@@ -1101,6 +1101,12 @@ if (zen_not_null($action)) {
             break;
           case 'gv_balance-desc':
             $disp_order = "cgc.amount DESC, c.customers_lastname, c.customers_firstname";
+            break;
+          case 'COWOA-asc':
+            $disp_order = "c.COWOA_account";
+            break;
+          case 'COWOA-desc':
+            $disp_order = "c.COWOA_account DESC";
             break;
           default:
             $disp_order = "ci.customers_info_date_account_created DESC";
