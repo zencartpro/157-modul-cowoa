@@ -2,16 +2,17 @@
 /**
  * Constants used by the zen_update_orders_history function.
  *
- * @package languageDefines
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+
+ * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: orders_status_updates.php for COWOA 2019-07-20 16:39:16Z webchills $
+ * @version $Id: orders_status_updates.php for COWOA 2023-11-15 15:39:16Z webchills $
  */
 define('OSH_EMAIL_SEPARATOR', '------------------------------------------------------');
 define('OSH_EMAIL_TEXT_SUBJECT', 'Order Update');
 define('OSH_EMAIL_TEXT_ORDER_NUMBER', 'Order Number:');
-define('OSH_EMAIL_TEXT_INVOICE_URL', 'Detailed Invoice:');
+define('OSH_EMAIL_TEXT_INVOICE_URL', 'Order Details:');
 define('OSH_EMAIL_TEXT_COWOA_URL', 'Check order status:');
 define('OSH_EMAIL_TEXT_COWOA_URL_CLICK', 'Click here to check the status of your order.');
 define('OSH_EMAIL_TEXT_DATE_ORDERED', 'Date Ordered:');

@@ -1,13 +1,13 @@
 <?php
 /**
  * functions_osh_update
- * Zen Cart German Specific
+ * Zen Cart German Specific (158 code in 157 / zencartpro adaptations)
  *
- * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: functions_osh_update.php for COWOA 2022-02-19 15:47:42Z webchills $
+ * @version $Id: functions_osh_update.php for COWOA 2023-11-15 15:27:42Z webchills $
  */
 if (!defined('IS_ADMIN_FLAG')) {
     exit('Invalid Access');
@@ -257,7 +257,9 @@ function zen_update_orders_history($orders_id, $message = '', $updated_by = null
             if (empty($updated_by)) {
                 if (IS_ADMIN_FLAG === true && isset($_SESSION['admin_id'])) {
                     $updated_by = zen_updated_by_admin();
-                } elseif (IS_ADMIN_FLAG === false && isset($_SESSION['customers_id'])) {
+                } else if (isset($_SESSION['emp_admin_id'])) {
+                   $updated_by = zen_updated_by_admin($_SESSION['emp_admin_id']);
+                } elseif (IS_ADMIN_FLAG === false && isset($_SESSION['customer_id'])) {
                     $updated_by = '';
                 } else {
                     $updated_by = 'N/A';

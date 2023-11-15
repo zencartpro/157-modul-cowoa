@@ -3,11 +3,11 @@
  * Header code file for the COWOA order status page (which displays details for a single specific order)
  *
  * Zen Cart German Specific
- * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: header_php.php 2022-03-27 19:28:00 webchills
+ * @version $Id: header_php.php 2023-11-15 16:47:00 webchills
 
  */
 // This should be first line of the script:
@@ -39,8 +39,8 @@ if(!$errorInvalidID && !$errorInvalidEmail)
   } else {
     $_SESSION['email_address'] = $_POST['query_email_address'];
     $_SESSION['customer_id'] = $customer_info->fields['customers_id'];
-    $_SESSION['COWOA']= 'True';
-    $_SESSION['ORDER_STATUS'] = 'True';
+    $_SESSION['COWOA']= 'true';
+    $_SESSION['ORDER_STATUS'] = 'true';
 $statuses_query = "SELECT os.orders_status_name, osh.*
                        FROM   " . TABLE_ORDERS_STATUS . " os, " . TABLE_ORDERS_STATUS_HISTORY . " osh
                        WHERE      osh.orders_id = :ordersID

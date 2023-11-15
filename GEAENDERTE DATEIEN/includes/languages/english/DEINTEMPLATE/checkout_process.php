@@ -1,12 +1,11 @@
 <?php
 /**
- * Zen Cart German Specific
- 
- * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * Zen Cart German Specific (158 code in 157) 
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: checkout_process.php for COWOA 2022-11-28 16:40:14Z webchills $
+ * @version $Id: checkout_process.php for COWOA 2023-11-15 15:40:14Z webchills $
  */
 // cowoa do not change
 if (isset($_SESSION['COWOA']) && $_SESSION['COWOA'] == true) {
@@ -33,12 +32,9 @@ define('EMAIL_TEXT_BILLING_ADDRESS', 'Billing Address');
 define('EMAIL_TEXT_PAYMENT_METHOD', 'Payment Method');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
+define('EMAIL_ORDER_NUMBER_SUBJECT',' No: ');
 
 define('EMAIL_GREETING_MR', 'Dear Mr.');
 define('EMAIL_GREETING_MS', 'Dear Mrs.');
 define('EMAIL_GREETING_NEUTRAL', 'Dear');
 
-// suggest not using # vs No as some spamm protection block emails with these subjects
-define('EMAIL_ORDER_NUMBER_SUBJECT', ' No: ');
-define('HEADING_ADDRESS_INFORMATION','Address Information');
-define('HEADING_SHIPPING_METHOD','Shipping Method');
