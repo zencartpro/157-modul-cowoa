@@ -62,6 +62,8 @@ Hat ein Kunde einmal ein Kundenkonto angelegt, kann er nicht mehr COWOA nutzen (
 Version 3.9.0:<br> 
 Anpassungen für 1.5.7g
 <br>
+Anleitung aktualisiert
+<br>
 <br>
 Version 3.8.0:<br>
 geänderte Dateien auf den Stand von 1.5.7f gebracht<br> 
@@ -264,13 +266,13 @@ Dann nun alle Dateien/Ordner aus dem Ordner NEUE DATEIEN in der vorgegebenen Str
 <p>Unter Kunden &gt; Kunden ist in der Kundenliste eine neue Spalte   verfügbar, die anzeigt, ob es sich um einen voll registrierten Kunden   oder einen COWOA-Kunden handelt.<br>
   Auch bei den Bestellungen ist ersichtlich, ob mit oder ohne Kundenkonto bestellt wurde.</p>
 <p><b>Email-Format für COWOA-Kunden</b></p>
-<p> Normale Kunden können bei der Registrierung angeben, ob sie Emails im   HTML- oder Textformat erhalten wollen und diese Einstellung auch später   in ihrem Kundenkonto ändern. COWOA-Kunden haben kein Kundenkonto, daher   wird die Auswahl zwischen HTML und Textemails im Zuge der Bestellung   nicht angeboten. Trotzdem muss übermittelt werden, ob Text oder HTML   gesendet werden soll. Voreingestellt sind Textemails für COWOA-Kunden. <br>
+<p> Normale Kunden können bei der Registrierung angeben, ob sie Emails im   HTML- oder Textformat erhalten wollen und diese Einstellung auch später   in ihrem Kundenkonto ändern. COWOA-Kunden haben kein Kundenkonto, daher   wird die Auswahl zwischen HTML und Textemails im Zuge der Bestellung   nicht angeboten. Trotzdem muss übermittelt werden, ob Text oder HTML   gesendet werden soll. Voreingestellt sind HTML Emails für COWOA-Kunden, da die meisten Shops HTML Mails versenden. <br>
   <br>
-  Wenn Sie stattdessen standardmäßig HTML-Emails an COWOA-Kunden senden wollen, ändern Sie in:<br>
+  Wenn Sie stattdessen standardmäßig Text-Emails an COWOA-Kunden senden wollen, ändern Sie in:<br>
   includes/templates/DEINTEMPLATE/templates/tpl_modules_no_account.php:<br>
-  <code>&lt;input type="hidden" name="email_format" value="TEXT" checked="checked" id="email-format-text" /&gt;</code> <br>
+  <code>&lt;input type="hidden" name="email_format" value="HTML" checked="checked" id="email-format-html" /&gt;</code> <br>
   auf: <br>
-  <code>&lt;input type="hidden" name="email_format" value="HTML" checked="checked" id="email-format-html" /&gt; </code></p>
+  <code>&lt;input type="hidden" name="email_format" value="TEXT" checked="checked" id="email-format-text" /&gt; </code></p>
 <p><b>Split-Login</b></p>
 <p>Bestellung ohne Kundenkonto funktioniert nur, wenn die geteilte   Anmeldeseite aktiv ist (Split-Login). Bei der Installation wird   automatisch auf Split-Login umgestellt. Sollte die Option "Bestellen   ohne Kundenkonto" nicht angeboten werden, überprüfen Sie unter   Konfiguration &gt; Layouteinstellungen, ob <strong>Anmeldeseite geteilt anzeigen</strong> wirklich auf true steht.</p>
 <p><b>Löschen von COWOA Konten</b></p>

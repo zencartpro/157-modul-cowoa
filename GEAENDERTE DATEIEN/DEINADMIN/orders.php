@@ -5,7 +5,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: orders.php for COWOA 2023-11-15 15:46:51Z webchills $
+ * @version $Id: orders.php for COWOA 2023-11-29 11:50:51Z webchills $
  */
 require('includes/application_top.php');
 
@@ -721,9 +721,9 @@ if (!empty($action) && $order_exists === true) {
           <?php $zco_notifier->notify('NOTIFY_ADMIN_ORDERS_PAYMENTDATA_COLUMN2', $oID, $order); ?>
         </div>
         <?php
-        if (isset($module) && (is_object($module) && method_exists($module, 'admin_notification'))) {
+        if (isset($module) && (is_object($module) && method_exists($module, 'admin_notification')) && $module->enabled) {
           ?>
-          <div class="row noprint"><?php echo zen_draw_separator('pixel_trans.gif', '1', '10'); ?><br><a href="#" id="payinfo" class="noprint"><?php echo POPUP_ADMIN_NOTIFICATION; ?></a></div>
+          <div class="row noprint"><?php echo zen_draw_separator('pixel_trans.gif', '1', '10'); ?><br><a href="#" id="payinfo" class="noprint"><?php echo TEXT_ADDITIONAL_PAYMENT_OPTIONS; ?></a></div>
           <div class="row" id="payment-details-section" style="display: none;"><?php echo $module->admin_notification($oID); ?></div>
           <div class="row noprint"><?php echo zen_draw_separator('pixel_trans.gif', '1', '10'); ?></div>
           <?php

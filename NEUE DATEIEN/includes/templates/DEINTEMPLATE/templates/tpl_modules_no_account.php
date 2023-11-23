@@ -2,11 +2,11 @@
 /**
  * @package Bestellen ohne Kundenkonto (COWOA)
  * Zen Cart German Specific
- * @copyright Copyright 2003-2022 Zen Cart Development Team
+ * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_modules_no_account.php 2022-06-10 16:55:16Z webchills $
+ * @version $Id: tpl_modules_no_account.php 2023-11-23 11:55:16Z webchills $
  */
 ?>
 
@@ -137,7 +137,7 @@
 </fieldset>
 
 <fieldset>
-<input type="hidden" name="email_format" value="TEXT" checked="checked" id="email-format-text" />
+<input type="hidden" name="email_format" value="HTML" checked="checked" id="email-format-html" />
 
 <?php
   if (CUSTOMERS_REFERRAL_STATUS == 2) {
