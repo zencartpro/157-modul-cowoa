@@ -4,7 +4,7 @@
  * @copyright Copyright 2003-2023 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: order.php for COWOA 2023-11-15 15:01:03Z webchills $
+ * @version $Id: order.php for COWOA 2023-12-07 11:01:03Z webchills $
  */
 /**
  * order class
@@ -1378,7 +1378,7 @@ class order extends base
     $html_msg['INTRO_ORDER_NUM_TITLE'] = EMAIL_TEXT_ORDER_NUMBER;
     $html_msg['INTRO_ORDER_NUMBER']    = $zf_insert_id;
     $html_msg['INTRO_DATE_TITLE']      = EMAIL_TEXT_DATE_ORDERED;
-    $html_msg['INTRO_DATE_ORDERED']    = strftime(DATE_FORMAT_LONG);
+    $html_msg['INTRO_DATE_ORDERED']    = $zcDate->output(DATE_FORMAT_LONG);
     $html_msg['INTRO_URL_TEXT']        = '';
     $html_msg['INTRO_URL_VALUE']       = '';
     $html_msg['EMAIL_TEXT_TELEPHONE']  = EMAIL_TEXT_TELEPHONE;
@@ -1415,7 +1415,7 @@ class order extends base
     $html_msg['INTRO_ORDER_NUM_TITLE'] = EMAIL_TEXT_ORDER_NUMBER;
     $html_msg['INTRO_ORDER_NUMBER']    = $zf_insert_id;
     $html_msg['INTRO_DATE_TITLE']      = EMAIL_TEXT_DATE_ORDERED;
-    $html_msg['INTRO_DATE_ORDERED']    = strftime(DATE_FORMAT_LONG);
+    $html_msg['INTRO_DATE_ORDERED']    = $zcDate->output(DATE_FORMAT_LONG);
     $html_msg['INTRO_URL_TEXT']        = EMAIL_TEXT_INVOICE_URL_CLICK;
     $html_msg['INTRO_URL_VALUE']       = zen_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $zf_insert_id, 'SSL', false);
 
