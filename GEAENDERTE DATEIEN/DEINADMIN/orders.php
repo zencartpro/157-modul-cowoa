@@ -1,11 +1,11 @@
 <?php
 /**
  * Zen Cart German Specific (158 code in 157 / zencartpro adaptations)
- * @copyright Copyright 2003-2023 Zen Cart Development Team
+ * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: orders.php for COWOA 2023-12-14 11:50:51Z webchills $
+ * @version $Id: orders.php for COWOA 2024-02-21 16:50:51Z webchills $
  */
 require('includes/application_top.php');
 
@@ -607,7 +607,15 @@ if (!empty($action) && $order_exists === true) {
               </tr>
               <tr>
                 <td class="noprint"><strong><?php echo ENTRY_CUSTOMER; ?></strong></td>
-                <td class="noprint"><?php echo '<a href="' . zen_href_link(FILENAME_CUSTOMERS, 'search=' . $order->customer['email_address'], 'SSL') . '">' . TEXT_CUSTOMER_LOOKUP . '</a>'; ?></td>
+                <td class="noprint">
+                  <?php 
+                  if ($order->customer['id'] == 0) { 
+                       echo '<a href="' . zen_href_link(FILENAME_CUSTOMERS, 'search=' . $order->customer['email_address'], 'SSL') . '">' . TEXT_CUSTOMER_LOOKUP . '</a>'; 
+                  } else {
+                       echo '<a href="' . zen_href_link(FILENAME_CUSTOMERS, 'cID=' . $order->customer['id'], 'SSL') . '">' . TEXT_CUSTOMER_LOOKUP . '</a>'; 
+                  }
+                  ?>
+                </td>
               </tr>
             </table>
           </div>

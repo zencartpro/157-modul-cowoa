@@ -1,11 +1,11 @@
 <?php
 /**
  * Zen Cart German Specific (158 code in 157)
- * @copyright Copyright 2003-2023 Zen Cart Development Team
+ * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: Customer.php for COWOA 2023-12-14 10:06:39Z webchills $
+ * @version $Id: Customer.php for COWOA 2024-02-21 16:06:39Z webchills $
  */
 
 class Customer extends base
@@ -159,6 +159,7 @@ class Customer extends base
             "UPDATE " . TABLE_CUSTOMERS . "
                 SET last_login_ip = '" . zen_db_input(zen_get_ip_address()) . "'
               WHERE customers_id = " . (int)$customer_id;
+        $db->Execute($sql);
 
         // these session variables are used in various places across the catalog
         $_SESSION['customer_id'] = (int)$customer_id;
@@ -225,6 +226,7 @@ class Customer extends base
 
         $sql =
             "SELECT c.*,
+                    CONCAT(customers_firstname,' ',LEFT(customers_lastname,1),'.') as name_with_initial,
                     cgc.amount as gv_balance,
                     customers_info_date_account_created AS date_account_created,
                     customers_info_date_account_last_modified AS date_account_last_modified,
