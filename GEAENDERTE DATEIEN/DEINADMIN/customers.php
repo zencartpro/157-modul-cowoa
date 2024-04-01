@@ -5,7 +5,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: customers.php for COWOA 2024-02-21 16:09:51Z webchills $
+ * @version $Id: customers.php for COWOA 2024-04-01 07:09:51Z webchills $
  */
 require 'includes/application_top.php';
 
@@ -1872,15 +1872,17 @@ if ($action === 'edit' || $action === 'update') {
             ];
             break;
         default:
-            $customer = new Customer($cInfo->customers_id);
+           
             if (isset($_GET['search'])) {
                 $_GET['search'] = zen_output_string_protected($_GET['search']);
             }
             if (isset($cInfo) && is_object($cInfo)) {
+                $customer = new Customer($cInfo->customers_id);
+
                 $heading[] = [
                     'text' =>
                         '<h4>' .
-                            TABLE_HEADING_ID . $cInfo->customers_id . ' ' .
+                            TABLE_HEADING_ID . ' ' . $cInfo->customers_id . ' ' .
                             $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname .
                         '</h4>' .
                         '<br>' .

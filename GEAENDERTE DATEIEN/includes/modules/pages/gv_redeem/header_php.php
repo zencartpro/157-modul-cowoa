@@ -3,15 +3,24 @@
  * GV redeem
  *
  * Zen Cart German Specific (158 code in 157)
- * @copyright Copyright 2003-2023 Zen Cart Development Team
+ * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: header_php.php for COWOA 2023-11-15 15:32:10Z webchills $
+ * @version $Id: header_php.php for COWOA 2024-01-04 07:32:10Z webchills $
  */
+/**
+ * @var queryFactory $db
+ * @var messageStack $messageStack
+ * @var notifier $zco_notifier
+ */
+
 $zco_notifier->notify('NOTIFY_HEADER_START_GV_REDEEM');
 
 require(DIR_WS_MODULES . zen_get_module_directory('require_languages.php'));
+
+$_GET['gv_no'] = $_GET['gv_no'] ?? '';
+$_GET['goback'] = '';
 $_GET['gv_no'] = zen_sanitize_string(trim($_GET['gv_no']));
 // if the customer is not logged on, redirect them to the login page
 if (!zen_is_logged_in() || zen_in_guest_checkout()) {
