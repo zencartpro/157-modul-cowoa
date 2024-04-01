@@ -3,11 +3,11 @@
  * Zen Cart German Specific (158 code in 157 / zencartpro adaptations)
  * create_account header_php.php
  * 
- * @copyright Copyright 2003-2023 Zen Cart Development Team
+ * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: create_account.php for COWOA 2023-11-15 15:45:29Z webchills $
+ * @version $Id: create_account.php for COWOA 2024-01-04 07:45:29Z webchills $
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_MODULE_START_CREATE_ACCOUNT');
@@ -308,7 +308,8 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && !isset($login_
         // hook notifier class
     $zco_notifier->notify('NOTIFY_LOGIN_SUCCESS_VIA_CREATE_ACCOUNT', $email_address, $extra_welcome_text, $send_welcome_email);
 /* IF ADMIN SETTING FOR WELCOME E-MAIL IS FALSE AND IF IT IS A COWOA ACCOUNT DO NOT SEND A WELCOME E-MAIL  */ 
-if  ((!$_SESSION['COWOA'] || $_SESSION['COWOA'] == false) && (SEND_WELCOME_EMAIL == 'true')) {
+if  ((!isset($_SESSION['COWOA']) || $_SESSION['COWOA'] == false) && (SEND_WELCOME_EMAIL == 'true')) {
+	
   // build the message content
     $name = $firstname . ' ' . $lastname;
 
