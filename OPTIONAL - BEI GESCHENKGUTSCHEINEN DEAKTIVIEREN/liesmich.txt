@@ -1,0 +1,15 @@
+Wenn Sie im Shop Geschenkgutscheine verkaufen, dann machen die nur mit einem Kundenkonto Sinn, da das Guthaben ja aufs Kundenkonto gebucht wird.
+Daher sollte Bestellen ohne Kundenkonto nicht angeboten werden, wenn Geschenkgutscheine im Warenkorb sind.
+
+In diesem Ordner finden Sie Vorlagen für die includes/templates/DEINTEMPLATE/tpl_login_default.php
+Wenn Sie das responsive_classic Template verwenden, verwenden Sie die Vorlage im Ordner DEINTEMPLATE_RESPONSIVE
+Für andere Templates, verwenden Sie die Vorlage im Ordner DEINTEMPLATE
+Hier wird Bestellen ohne Kundenkonto nicht angeboten, wenn ein Artikel aus der Kategorie 21 im Warenkorb ist:
+
+<?php if (COWOA_STATUS == 'true' && ($_SESSION['cart']->in_cart_check('master_categories_id','21') == 0)) { ?>
+
+Kategorie 21 ist hier ein Beispiel für die Kategorie Geschenkgutscheine in Ihrem Shop.
+
+Passen Sie die 21 in dieser Zeile auf die Kategorie ID der Geschenkgutscheine in Ihrem Shop an.
+
+Dann spielen Sie die angepasste includes/templates/DEINTEMPLATE/tpl_login_default.php in Ihrem Shop ein
