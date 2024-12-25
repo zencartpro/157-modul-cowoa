@@ -7,7 +7,7 @@
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: paypalwpp.php for COWOA 2024-01-04 07:16:14Z webchills $
+ * @version $Id: paypalwpp.php for COWOA 2024-12-25 09:44:14Z webchills $
  */
 /**
  * load the communications layer code
@@ -1148,7 +1148,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
 
         if (isset($order->delivery['country']['id'])) {
             $shippingISO = zen_get_countries_with_iso_codes($order->delivery['country']['id']);
-            $user_locale_info[] = strtoupper($shippingISO['countries_iso_code_2']);
+            $user_locale_info[] = strtoupper($shippingISO['countries_iso_code_2'] ?? '');
         }
 
         if (isset($order->billing['country']['id'])) {
@@ -2014,6 +2014,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     $address_format_id = 5;
     $state_id = 0;
     $acct_exists = false;
+    $country_code3 = '???';
     // store default address id for later use/reference
     $original_default_address_id = $_SESSION['customer_default_address_id'] ?? 'Not set';
 
@@ -2098,7 +2099,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     // delivery
     if (strtoupper($_SESSION['paypal_ec_payer_info']['ship_address_status']) != 'NONE') {
       $order->delivery['name']          = $paypal_ec_payer_info['ship_name'];
-      $order->delivery['company']       = $paypal_ec_payer_info['payer_business'];
+      $order->delivery['company']       = trim($paypal_ec_payer_info['ship_name'] . ' ' . $paypal_ec_payer_info['payer_business']);
       $order->delivery['street_address']= $paypal_ec_payer_info['ship_street_1'];
       $order->delivery['suburb']        = $paypal_ec_payer_info['ship_street_2'];
       $order->delivery['city']          = $paypal_ec_payer_info['ship_city'];
@@ -2208,17 +2209,18 @@ if (false) { // disabled until clarification is received about coupons in PayPal
 
       if (!$check_customer->EOF) {
         $acct_exists = true;
-
-        // see if this was only a temp account -- if so, remove it
-        if ($check_customer->fields['customers_paypal_ec'] == '1') {
-          // Delete the existing temporary account
-          $this->ec_delete_user($check_customer->fields['customers_id']);
-          $acct_exists = false;
-
-          // debug
-          $this->zcLog('ec_step2_finish - 5', 'Found temporary account - deleting it.');
-
-        }
+        // DONT REMOVE ACCOUNTS WITH customers_paypal_ec = 1 AS OTHERWISE EVERY TIME THE SAME EMAIL LOGS IN VIA PAYPAL EXPRESS A NEW ACCOUNT IS CREATED IN SOME SCENARIOS
+	// IF YOU REALLY WANT TO DELETE THESE ACCOUNTS UNCOMMENT LINES 2217 TO 2225
+	// see if this was only a temp account -- if so, remove it
+//        if ($check_customer->fields['customers_paypal_ec'] == '1') {
+//          // Delete the existing temporary account
+//          $this->ec_delete_user($check_customer->fields['customers_id']);
+//          $acct_exists = false;
+//
+//          // debug
+//          $this->zcLog('ec_step2_finish - 5', 'Found temporary account - deleting it.');
+//
+//        }
       }
 
       // Create an account, if the account does not exist
@@ -3046,8 +3048,8 @@ if (false) { // disabled until clarification is received about coupons in PayPal
             $this->_doDebug('PayPal Error Log - ec_step1()', "In function: ec_step1()\r\n\r\nValue List:\r\n" . str_replace('&',"\r\n", $doPayPal->_sanitizeLog($doPayPal->_parseNameValueList($doPayPal->lastParamList))) . "\r\n\r\nResponse:\r\n" . print_r($response, true));
           }
           $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_GEN_ERROR;
-          $errorNum = urldecode($response['L_ERRORCODE0'] . $response['RESULT']);
-          if ($response['RESULT'] == 25) $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_NOT_WPP_ACCOUNT_ERROR;
+          $errorNum = urldecode($response['L_ERRORCODE0'] . ($response['RESULT'] ?? ''));
+          if (isset($response['RESULT']) && $response['RESULT'] == 25) $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_NOT_WPP_ACCOUNT_ERROR;
           if ($response['L_ERRORCODE0'] == 10002) $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_SANDBOX_VS_LIVE_ERROR;
           if ($response['L_ERRORCODE0'] == 10565) {
             $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_WPP_BAD_COUNTRY_ERROR;
@@ -3066,7 +3068,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         break;
 
       case 'GetExpressCheckoutDetails':
-        if ($basicError || $_SESSION['paypal_ec_token'] != urldecode($response['TOKEN'])) {
+       if ($basicError || ((isset($_SESSION['paypal_ec_token']) && isset($response['TOKEN'])) && $_SESSION['paypal_ec_token'] != urldecode($response['TOKEN'])) ) {      
           // if response indicates an error, send the customer back to checkout and display the error. Debug to store owner if active.
           if ($this->enableDebugging) {
             $this->_doDebug('PayPal Error Log - ec_step2()', "In function: ec_step2()\r\n\r\nValue List:\r\n" . str_replace('&',"\r\n", urldecode($doPayPal->_sanitizeLog($doPayPal->_parseNameValueList($doPayPal->lastParamList)))) . "\r\n\r\nResponse:\r\n" . urldecode(print_r($response, true)));
@@ -3082,7 +3084,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         break;
 
       case 'DoExpressCheckoutPayment':
-        if ($basicError || $_SESSION['paypal_ec_token'] != urldecode($response['TOKEN'])) {
+       if ($basicError || ((isset($_SESSION['paypal_ec_token']) && isset($response['TOKEN'])) && $_SESSION['paypal_ec_token'] != urldecode($response['TOKEN'])) ) { 
           // there's an error, so alert customer, and if debug is on, notify storeowner
           if ($this->enableDebugging) {
             $this->_doDebug('PayPal Error Log - before_process() - EC', "In function: before_process() - Express Checkout\r\n\r\nValue List:\r\n" . str_replace('&',"\r\n", $doPayPal->_sanitizeLog($doPayPal->_parseNameValueList($doPayPal->lastParamList))) . "\r\n\r\nResponse:\r\n" . print_r($response, true));
@@ -3161,6 +3163,9 @@ if (false) { // disabled until clarification is received about coupons in PayPal
             $this->_doDebug('PayPal Error Log - ' . $operation, "Value List:\r\n" . str_replace('&',"\r\n", $doPayPal->_sanitizeLog($doPayPal->_parseNameValueList($doPayPal->lastParamList))) . "\r\n\r\nResponse:\r\n" . print_r($response, true));
           }
           $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_VOID_ERROR;
+          if (empty($response['RESULT'])) {
+              $response['RESULT'] = '';
+          }
           if ($response['RESULT'] == 12) $response['L_SHORTMESSAGE0'] = $response['RESULT'] . ' ' . $response['RESPMSG'];
           if ($response['RESULT'] == 108) $response['L_SHORTMESSAGE0'] = $response['RESULT'] . ' ' . $response['RESPMSG'];
           $errorText .= ' (' . urldecode($response['L_SHORTMESSAGE0']) . ') ' . $response['L_ERRORCODE0'];
