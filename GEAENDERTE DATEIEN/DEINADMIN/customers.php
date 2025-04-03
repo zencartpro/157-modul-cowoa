@@ -1,11 +1,11 @@
 <?php
 /**
  * Zen Cart German Specific (158 code in 157 / zencartpro adaptations)
- * @copyright Copyright 2003-2024 Zen Cart Development Team
+ * @copyright Copyright 2003-2025 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: customers.php for COWOA 2024-04-04 18:37:51Z webchills $
+ * @version $Id: customers.php for COWOA 2025-04-03 15:37:51Z webchills $
  */
 require 'includes/application_top.php';
 
@@ -427,9 +427,9 @@ if (!empty($action)) {
                         $html_msg,
                         'default'
                     );
-          $userList = zen_get_users($_SESSION['admin_id']);
-          $userDetails = $userList[0];
-          $adminUser = $userDetails['id'] . '-' . $userDetails['name'] . ' ' . zen_get_ip_address();
+                    $userList = zen_get_users($_SESSION['admin_id']);
+                    $userDetails = $userList[0];
+                    $adminUser = $userDetails['id'] . '-' . $userDetails['name'] . ' ' . zen_get_ip_address();
                     $message = sprintf(
                         EMAIL_CUSTOMER_PWD_CHANGE_MESSAGE_FOR_ADMIN,
                         $custinfo['customers_firstname'] . ' ' . $custinfo['customers_lastname'] . ' ' . $custinfo['customers_email_address'],
@@ -522,8 +522,8 @@ if ($action === 'edit' || $action === 'update') {
 
     <!-- body //-->
     <div class="container-fluid">
-      <!-- body_text //-->
-      <h1><?php echo HEADING_TITLE; ?></h1>
+        <!-- body_text //-->
+        <h1><?php echo HEADING_TITLE; ?></h1>
 <?php
 if ($action === 'edit' || $action === 'update') {
     $newsletter_array = [
@@ -550,9 +550,9 @@ if ($action === 'edit' || $action === 'update') {
           <div class="form-control"><?php if ($cInfo->COWOA_account) echo COWOA_STATUS_TRUE; else echo COWOA_STATUS_FALSE; ?></div>
        </div>
      </div>  
-            <?php
+<?php
     if (ACCOUNT_GENDER === 'true') {
-              ?>
+?>
             <div class="form-group">
                 <div class="col-sm-3">
                     <p class="control-label"><?php echo ENTRY_GENDER; ?></p>
@@ -923,10 +923,10 @@ if ($action === 'edit' || $action === 'update') {
             </div>
 <?php
     if (ACCOUNT_FAX_NUMBER === 'true') {
-            ?>
+?>
             <div class="form-group">
                 <?php echo zen_draw_label(ENTRY_FAX_NUMBER, 'customers_fax', 'class="col-sm-3 control-label"'); ?>
-              <div class="col-sm-9 col-md-6">
+                <div class="col-sm-9 col-md-6">
 <?php
         if ($processed === true) {
             echo $cInfo->customers_fax . zen_draw_hidden_field('customers_fax');
@@ -997,12 +997,12 @@ if ($action === 'edit' || $action === 'update') {
 <?php
     if ($processed === true) {
         if ($cInfo->customers_newsletter === 1) {
-                    echo ENTRY_NEWSLETTER_YES;
-                  } else {
-                    echo ENTRY_NEWSLETTER_NO;
-                  }
-                  echo zen_draw_hidden_field('customers_newsletter');
-                } else {
+            echo ENTRY_NEWSLETTER_YES;
+        } else {
+            echo ENTRY_NEWSLETTER_NO;
+        }
+        echo zen_draw_hidden_field('customers_newsletter');
+    } else {
         echo zen_draw_pull_down_menu(
             'customers_newsletter',
             $newsletter_array,
@@ -1176,71 +1176,71 @@ if ($action === 'edit' || $action === 'update') {
             </div>
 <?php
 // Sort Listing
-        switch ($_GET['list_order']) {
-          case 'id-asc':
+    switch ($_GET['list_order']) {
+        case 'id-asc':
             $disp_order = "ci.customers_info_date_account_created";
             break;
-          case 'firstname':
+        case 'firstname':
             $disp_order = "c.customers_firstname";
             break;
-          case 'firstname-desc':
+        case 'firstname-desc':
             $disp_order = "c.customers_firstname DESC";
             break;
-          case 'group-asc':
+        case 'group-asc':
             $disp_order = "c.customers_group_pricing";
             break;
-          case 'group-desc':
+        case 'group-desc':
             $disp_order = "c.customers_group_pricing DESC";
             break;
-          case 'lastname':
+        case 'lastname':
             $disp_order = "c.customers_lastname, c.customers_firstname";
             break;
-          case 'lastname-desc':
+        case 'lastname-desc':
             $disp_order = "c.customers_lastname DESC, c.customers_firstname";
             break;
-          case 'company':
+        case 'company':
             $disp_order = "a.entry_company";
             break;
-          case 'company-desc':
+        case 'company-desc':
             $disp_order = "a.entry_company DESC";
             break;
-          case 'login-asc':
+        case 'login-asc':
             $disp_order = "ci.customers_info_date_of_last_logon";
             break;
-          case 'login-desc':
+        case 'login-desc':
             $disp_order = "ci.customers_info_date_of_last_logon DESC";
             break;
-          case 'approval-asc':
+        case 'approval-asc':
             $disp_order = "c.customers_authorization";
             break;
-          case 'approval-desc':
+        case 'approval-desc':
             $disp_order = "c.customers_authorization DESC";
             break;
-          case 'gv_balance-asc':
+        case 'gv_balance-asc':
             $disp_order = "cgc.amount, c.customers_lastname, c.customers_firstname";
             break;
-          case 'gv_balance-desc':
+        case 'gv_balance-desc':
             $disp_order = "cgc.amount DESC, c.customers_lastname, c.customers_firstname";
             break;
-          case 'COWOA-asc':
+        case 'COWOA-asc':
             $disp_order = "c.COWOA_account";
             break;
-          case 'COWOA-desc':
+        case 'COWOA-desc':
             $disp_order = "c.COWOA_account DESC";
             break;
-          default:
+        default:
             $disp_order = "ci.customers_info_date_account_created DESC";
             break;
-        }
-        ?>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 configurationColumnLeft">
+    }
+?>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 configurationColumnLeft">
                     <table class="table table-hover" role="listbox">
-              <thead>
-                <tr class="dataTableHeadingRow">
-                  <th class="dataTableHeadingContent text-right">
-                      <?php echo TABLE_HEADING_ID; ?>
-                  </th>
+                        <thead>
+                        <tr class="dataTableHeadingRow">
+                            <th class="dataTableHeadingContent text-right">
+                                <?php echo TABLE_HEADING_ID; ?>
+                            </th>
                             <th class="dataTableHeadingContent">
                                 &nbsp;
                             </th>
@@ -1353,7 +1353,7 @@ if ($action === 'edit' || $action === 'update') {
     // The 'content' element is required; the 'class' and 'parms' are optional.
     //
     $additional_headings = [];
-                  $additional_heading_count = 0;
+    $additional_heading_count = 0;
     $zco_notifier->notify('NOTIFY_ADMIN_CUSTOMERS_LISTING_HEADER', [], $additional_headings);
     if (is_array($additional_headings) && count($additional_headings) !== 0) {
         $additional_heading_count = count($additional_headings);
@@ -1560,7 +1560,7 @@ if ($action === 'edit' || $action === 'update') {
     // Split Page
     // reset page when page is unknown
     if ((empty($_GET['page']) || $_GET['page'] === '1') && !empty($_GET['cID'])) {
-                    $check_page = $db->Execute($customers_query_raw);
+        $check_page = $db->Execute($customers_query_raw);
         $check_count = 0;
         if ($check_page->RecordCount() > MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) {
             foreach ($check_page as $item) {
@@ -1754,10 +1754,11 @@ if ($action === 'edit' || $action === 'update') {
 <?php
     }
 ?>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 configurationColumnRight">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 configurationColumnRight">
 <?php
     $heading = [];
     $contents = [];
@@ -1872,7 +1873,6 @@ if ($action === 'edit' || $action === 'update') {
             ];
             break;
         default:
-           
             if (isset($_GET['search'])) {
                 $_GET['search'] = zen_output_string_protected($_GET['search']);
             }
@@ -2139,16 +2139,16 @@ if ($action === 'edit' || $action === 'update') {
                                 <?php echo IMAGE_RESET; ?>
                             </a>
                         </td>
-              </tr>
-              <?php
-            }
-            ?>
-          </table>
-        </div>
-        <?php
-      }
-      ?>
-      <!-- body_text_eof //-->
+                    </tr>
+<?php
+    }
+?>
+                </table>
+            </div>
+<?php
+}
+?>
+        <!-- body_text_eof //-->
     </div>
     <!-- body_eof //-->
 
@@ -2156,13 +2156,13 @@ if ($action === 'edit' || $action === 'update') {
     <?php require DIR_WS_INCLUDES . 'footer.php'; ?>
     <!-- footer_eof //-->
     <script>
-        $(function() {
-            $( "#loginform" ).submit(function( event ) {
-                $("#emp-timestamp").val(Date.now()/1000);
+        $(function () {
+            $("#loginform").submit(function (event) {
+                $("#emp-timestamp").val(Date.now() / 1000);
             });
         });
     </script>
-  </body>
-</html>
+    </body>
+    </html>
 <?php
 require DIR_WS_INCLUDES . 'application_bottom.php';

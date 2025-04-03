@@ -3,11 +3,11 @@
  * paypalwpp.php payment module class for PayPal Express Checkout payment method
  * Zen Cart German Specific (zencartpro adaptations / 158 code in 157)
  *
- * @copyright Copyright 2003-2024 Zen Cart Development Team
+ * @copyright Copyright 2003-2025 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: paypalwpp.php for COWOA 2024-12-25 09:44:14Z webchills $
+ * @version $Id: paypalwpp.php for COWOA 2025-04-03 15:44:14Z webchills $
  */
 /**
  * load the communications layer code
@@ -123,9 +123,9 @@ class paypalwpp extends base {
   protected $reasoncode;
   protected $numitems;
   protected $amt;
-  public $auth_code; // used in order class 
+  public $auth_code; // used in order class
   protected $responsedata;
-  public $transaction_id; // used in order class 
+  public $transaction_id; // used in order class
   public $ot_merge;     //-Public, since might be referenced by an observer.
   protected $requestPrefix;
   protected $infoPrefix;
@@ -212,8 +212,6 @@ class paypalwpp extends base {
     $this->new_acct_notify = MODULE_PAYMENT_PAYPALWPP_NEW_ACCT_NOTIFY;
     $this->zone = (int)MODULE_PAYMENT_PAYPALWPP_ZONE;
     if (is_object($order)) $this->update_status();
-
-    
 
     // if operating in markflow mode, start EC process when submitting order
     if (!$this->in_special_checkout()) {
@@ -445,6 +443,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
 
       // in case of funding error, set the redirect URL which is used by the _errorHandler
       $this->ec_redirect_url = $this->getPayPalLoginServer() . "?cmd=_express-checkout&token=" . $_SESSION['paypal_ec_token'] . "&useraction=continue";
+
       $response = $doPayPal->DoExpressCheckoutPayment($_SESSION['paypal_ec_token'],
                                                       $_SESSION['paypal_ec_payer_id'],
                                                       $options);
@@ -461,6 +460,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       // SUCCESS
       $this->payment_type = MODULE_PAYMENT_PAYPALWPP_EC_TEXT_TYPE;
       $this->responsedata = $response;
+
       // -----
       // Note that variable names are 'prefixed', based on the NVP/PAYFLOW mode currently in use.  Those
       // prefixes are set by the paypal_init method.
@@ -660,7 +660,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
   function check() {
     global $db;
     if (!isset($this->_check)) {
-      $check_query = $db->Execute("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_PAYMENT_PAYPALWPP_STATUS'");
+      $check_query = $db->Execute("SELECT configuration_value FROM " . TABLE_CONFIGURATION . " WHERE configuration_key = 'MODULE_PAYMENT_PAYPALWPP_STATUS'");
       $this->_check = !$check_query->EOF;
     }
 
@@ -751,11 +751,11 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         $db->Execute("REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Express Checkout Button aktivieren?', 'MODULE_PAYMENT_PAYPALWPP_ECS_BUTTON', '43', 'Wollen Sie den PayPal Express Button aktivieren?<br>Der Button erscheint dann auf der Warenkorbseite und der Loginseite, um Ihre Kunden zum Bezahlen mit PayPal einzuladen, ohne zuerst all ihre Adressdaten im Shop angeben zu müssen.<br>Der Kunde kann dann einfach mit seinem PayPal Account einloggen und es wird - falls unten aktiviert - automatisch ein Kundenaccount im Shop mit seinen bei PayPal hinterlegten Daten angelegt.<br><br>Die Verwendung des Express Buttons erhöht nachweislich Umsatz und Conversions.<br><br>empfohlene Voreinstellung: On ', now())");
       }
       if (!defined('MODULE_PAYMENT_PAYPALWPP_BRANDNAME')) {
-        $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Store Brand Name at PayPal', 'MODULE_PAYMENT_PAYPALWPP_BRANDNAME', '', 'The name of your store as it should appear on the PayPal login page. If blank, your store name will be used.', '6', '25', now())");
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Store Brand Name at PayPal', 'MODULE_PAYMENT_PAYPALWPP_BRANDNAME', '', 'The name of your store as it should appear on the PayPal login page. If blank, your store name will be used.', '6', '25', now())");
         $db->Execute("REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Ihr Shopname bei PayPal', 'MODULE_PAYMENT_PAYPALWPP_BRANDNAME', '43', 'Der Name Ihres Shops, wie er auf der PayPal-Login-Seite erscheinen soll. Wenn Sie hier leer lassen, wird der unter Konfiguration > Mein Shop hinterlegte Shopname verwendet.', now())");
       }
       if (!defined('MODULE_PAYMENT_PAYPALEC_ALLOWEDPAYMENT')) {
-        $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Allow eCheck?', 'MODULE_PAYMENT_PAYPALEC_ALLOWEDPAYMENT', 'Any', 'Do you want to allow non-instant payments like eCheck/EFT/ELV?', '6', '25', 'zen_cfg_select_option(array(\'Any\', \'Instant Only\'), ', now())");
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Allow eCheck?', 'MODULE_PAYMENT_PAYPALEC_ALLOWEDPAYMENT', 'Any', 'Do you want to allow non-instant payments like eCheck/EFT/ELV?', '6', '25', 'zen_cfg_select_option(array(\'Any\', \'Instant Only\'), ', now())");
         $db->Execute("REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('eCheck erlauben?', 'MODULE_PAYMENT_PAYPALEC_ALLOWEDPAYMENT', '43', 'Wollen Sie nicht sofortige Zahlungsarten wie Lastschrift bei PayPal erlauben?<br><br>Any = alle Zahlungsarten, auch nicht sofortige sind erlaubt<br>Instant Only: nur sofortige Zahlungsarten sind erlaubt<br><br>empfohlene Voreinstellung: Instant Only', now())");
       }
       
@@ -781,8 +781,8 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     }
 
     global $db;
-    $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key LIKE 'MODULE\_PAYMENT\_PAYPALWPP\_%' or configuration_key like 'MODULE\_PAYMENT\_PAYPALEC\_%'");
-    $db->Execute("delete from " . TABLE_CONFIGURATION_LANGUAGE . " where configuration_key LIKE 'MODULE\_PAYMENT\_PAYPALWPP\_%' or configuration_key like 'MODULE\_PAYMENT\_PAYPALEC\_%'");
+    $db->Execute("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key LIKE 'MODULE\_PAYMENT\_PAYPALWPP\_%' OR configuration_key LIKE 'MODULE\_PAYMENT\_PAYPALEC\_%'");
+    $db->Execute("DELETE FROM " . TABLE_CONFIGURATION_LANGUAGE . " where configuration_key LIKE 'MODULE\_PAYMENT\_PAYPALWPP\_%' or configuration_key like 'MODULE\_PAYMENT\_PAYPALEC\_%'");
     $this->notify('NOTIFY_PAYMENT_PAYPALWPP_UNINSTALLED');
   }
   /**
@@ -930,7 +930,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     }
 
     // look up history on this order from PayPal table
-    $sql = "select * from " . TABLE_PAYPAL . " where order_id = :orderID  AND parent_txn_id = '' ";
+    $sql = "SELECT * FROM " . TABLE_PAYPAL . " WHERE order_id = :orderID  AND parent_txn_id = '' ";
     $sql = $db->bindVars($sql, ':orderID', $oID, 'integer');
     $zc_ppHist = $db->Execute($sql);
     if ($zc_ppHist->RecordCount() == 0) return false;
@@ -985,7 +985,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       }
     }
     // look up history on this order from PayPal table
-    $sql = "select * from " . TABLE_PAYPAL . " where order_id = :orderID  AND parent_txn_id = '' ";
+    $sql = "SELECT * FROM " . TABLE_PAYPAL . " WHERE order_id = :orderID  AND parent_txn_id = '' ";
     $sql = $db->bindVars($sql, ':orderID', $oID, 'integer');
     $zc_ppHist = $db->Execute($sql);
     if ($zc_ppHist->RecordCount() == 0) return false;
@@ -1043,7 +1043,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       }
     }
     // look up history on this order from PayPal table
-    $sql = "select * from " . TABLE_PAYPAL . " where order_id = :orderID  AND parent_txn_id = '' ";
+    $sql = "SELECT * FROM " . TABLE_PAYPAL . " WHERE order_id = :orderID  AND parent_txn_id = '' ";
     $sql = $db->bindVars($sql, ':orderID', $oID, 'integer');
     $zc_ppHist = $db->Execute($sql);
     if ($zc_ppHist->RecordCount() == 0) return false;
@@ -1090,7 +1090,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       }
     }
     // look up history on this order from PayPal table
-    $sql = "select * from " . TABLE_PAYPAL . " where order_id = :orderID  AND parent_txn_id = '' ";
+    $sql = "SELECT * FROM " . TABLE_PAYPAL . " WHERE order_id = :orderID  AND parent_txn_id = '' ";
     $sql = $db->bindVars($sql, ':orderID', $oID, 'integer');
     $sql = $db->bindVars($sql, ':transID', $voidAuthID, 'string');
     $zc_ppHist = $db->Execute($sql);
@@ -1175,6 +1175,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         }
         return '';
     }
+
   /**
    * Set the currency code -- use defaults if active currency is not a currency accepted by PayPal
    */
@@ -1727,7 +1728,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
           }
         }
       }
-
+      
       // Do we require a "confirmed" shipping address ?
       if (MODULE_PAYMENT_PAYPALWPP_CONFIRMED_ADDRESS == 'Yes') {
         $options['REQCONFIRMSHIPPING'] = 1;
@@ -1735,7 +1736,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     }
     // if we know customer's email address, supply it, so as to pre-fill the signup box at PayPal (useful for new PayPal accounts only)
     if (!empty($_SESSION['customer_first_name']) && !empty($_SESSION['customer_id'])) {
-      $sql = "select * from " . TABLE_CUSTOMERS . " where customers_id = :custID ";
+      $sql = "SELECT * FROM " . TABLE_CUSTOMERS . " WHERE customers_id = :custID ";
       $sql = $db->bindVars($sql, ':custID', $_SESSION['customer_id'], 'integer');
       $zc_getemail = $db->Execute($sql);
       if ($zc_getemail->RecordCount() > 0 && $zc_getemail->fields['customers_email_address'] != '') {
@@ -1789,7 +1790,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
 //echo '<br>2nd submission. {'.$response['L_ERRORCODE0'].'}<pre>'.print_r($options, true);
     }
     if ($submissionCheckTwo) {
-     if (isset($response['L_ERRORCODE0']) && $response['L_ERRORCODE0'] == '10413') {
+    if (isset($response['L_ERRORCODE0']) && $response['L_ERRORCODE0'] == '10413') {
       $this->zcLog('ec_step1 - 4 - removing line-item details', 'PayPal designed their own mathematics rules. Dumbing it down for them.' . "\n" . print_r($options, true));
 //echo '2nd submission REJECTED. {'.$response['L_ERRORCODE0'].'}<pre>'.print_r($options, true) . urldecode(print_r($response, true));
       foreach ($options as $key=>$value) {
@@ -1821,7 +1822,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     // prepare to redirect to PayPal so the customer can log in and make their selections
     $paypal_url = $this->getPayPalLoginServer();
 
-    
+
     // Set the name of the displayed "continue" button on the PayPal site.
     // 'commit' = "Pay Now"  ||  'continue' = "Review Payment"
     $orderReview = true;
@@ -1987,6 +1988,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       $order_totals = $order_total_modules->process();
       $this->zcLog('ec_step2 ', 'Instantiated $order object contents: ' . print_r($order, true));
     }
+
     if ($order->info['total'] < 0.01 && urldecode($response[$this->requestPrefix . 'AMT']) > 0) $order->info['total'] = urldecode($response[$this->requestPrefix . 'AMT']);
     //$this->zcLog('ec_step2 - processed info', print_r(array_merge($step2_payerinfo, $step2_shipto), true));
 
@@ -2039,10 +2041,10 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         $country_code3 = $country1->fields['countries_iso_code_3'];
         $address_format_id = (int)$country1->fields['address_format_id'];
     } elseif (!$country2->EOF) {
-      // if didn't find it based on name, check using ISO code (ie: in case of no-shipping-address required/supplied)
-      $country_id = $country2->fields['countries_id'];
-      $country_code3 = $country2->fields['countries_iso_code_3'];
-      $address_format_id = (int)$country2->fields['address_format_id'];
+        // if didn't find it based on name, check using ISO code (ie: in case of no-shipping-address required/supplied)
+        $country_id = $country2->fields['countries_id'];
+        $country_code3 = $country2->fields['countries_iso_code_3'];
+        $address_format_id = (int)$country2->fields['address_format_id'];
     } else {
       // if defaulting to Germany, make sure Germany is valid
       $sql = "SELECT countries_id FROM " . TABLE_COUNTRIES . " WHERE countries_id = :countryId: LIMIT 1";
@@ -2757,7 +2759,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
                            array('fieldName'=>'entry_country_id', 'value'=>$country_id, 'type'=>'integer'));
     if ($address_question_arr['company'] != '' && $address_question_arr['company'] != $address_question_arr['name']) array('fieldName'=>'entry_company', 'value'=>$address_question_arr['company'], 'type'=>'string');
     if (!empty($address_question_arr['payer_gender'])) {
-        $sql_data_array[] = array('fieldName'=>'entry_gender', 'value'=>$address_question_arr['payer_gender'], 'type'=>'enum:m|f');
+    $sql_data_array[] = array('fieldName'=>'entry_gender', 'value'=>$address_question_arr['payer_gender'], 'type'=>'enum:m|f');
     }
     $sql_data_array[] = array('fieldName'=>'entry_suburb', 'value'=>$address_question_arr['suburb'], 'type'=>'string');
     if (!empty($zone_id) && ($zone_id > 0)) {
@@ -2866,7 +2868,8 @@ if (false) { // disabled until clarification is received about coupons in PayPal
                     zen_redirect(zen_href_link(FILENAME_SHOPPING_CART, '', 'NONSSL'));
                 }
             }
-          }
+        }
+
         // -----
         // If the cart contents are unchanged, i.e. no saved products were added via the
         // cart's restore_contents method, save the cart's cartID value (a random number
