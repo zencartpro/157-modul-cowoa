@@ -3,11 +3,11 @@
  * paypalwpp.php payment module class for PayPal Express Checkout payment method
  * Zen Cart German Specific (zencartpro adaptations / 158 code in 157)
  *
- * @copyright Copyright 2003-2025 Zen Cart Development Team
+ * @copyright Copyright 2003-2026 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: paypalwpp.php for COWOA 2025-04-03 15:44:14Z webchills $
+ * @version $Id: paypalwpp.php for COWOA 2026-04-04 15:44:14Z webchills $
  */
 /**
  * load the communications layer code
@@ -489,7 +489,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       $this->transactiontype = $response[$this->infoPrefix . 'TRANSACTIONTYPE'];
       $this->payment_time = urldecode($response[$this->infoPrefix . 'ORDERTIME']);
       $this->feeamt = empty($response[$this->infoPrefix . 'FEEAMT']) ? 0 : urldecode($response[$this->infoPrefix . 'FEEAMT']);
-      $this->taxamt = urldecode($response[$this->infoPrefix . 'TAXAMT']);
+      $this->taxamt = urldecode($response[$this->infoPrefix . 'TAXAMT'] ?? '');
       $this->pendingreason = $response[$this->infoPrefix . 'PENDINGREASON'];
       $this->reasoncode = $response[$this->infoPrefix . 'REASONCODE'];
       $this->numitems = count($order->products);
@@ -1872,7 +1872,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     // with the token we retrieve the data about this user
     $response = $doPayPal->GetExpressCheckoutDetails($_SESSION['paypal_ec_token']);
 
-    $this->notify('NOTIFY_PAYPALEC_PARSE_GETEC_RESULT', array(), $response);
+    $this->notify('NOTIFY_PAYPALEC_PARSE_GETEC_RESULT', [], $response);
 
     //$this->zcLog('ec_step2 - GetExpressCheckout response', print_r($response, true));
 
@@ -1882,7 +1882,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     $error = $this->_errorHandler($response, 'GetExpressCheckoutDetails');
 
     // Fill in possibly blank return values, prevents PHP notices in follow-on checking clause.
-    $response_vars = array(
+    $response_vars = [
         $this->requestPrefix . 'SHIPTONAME',
         $this->requestPrefix . 'SHIPTOSTREET',
         $this->requestPrefix . 'SHIPTOSTREET2',
@@ -1890,7 +1890,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         $this->requestPrefix . 'SHIPTOSTATE',
         $this->requestPrefix . 'SHIPTOZIP',
         $this->requestPrefix . 'SHIPTOCOUNTRYCODE',
-    );
+    ];
 
     $address_received = '';
     foreach ($response_vars as $response_var) {
@@ -1970,26 +1970,32 @@ if (false) { // disabled until clarification is received about coupons in PayPal
     if (!isset($order) || !isset($order->info) || !is_array($order->info) || !zen_not_null($order)) {
       $this->zcLog('ec_step2 ', 'Re-instantiating $order object.');
       // init new order object
-      if (!class_exists('order')) require(DIR_WS_CLASSES . 'order.php');
-      $order = new order;
+        if (!class_exists('order')) {
+            require DIR_WS_CLASSES . 'order.php';
+        }
+        $order = new order();
 
-      // load the selected shipping module so that shipping taxes can be assessed
-      if (isset($_SESSION['shipping'])) {
-          if (!class_exists('shipping')) {
-              require DIR_WS_CLASSES . 'shipping.php';
-          }
-          $shipping_modules = new shipping($_SESSION['shipping']);
-      }
+        // load the selected shipping module so that shipping taxes can be assessed
+        if (isset($_SESSION['shipping'])) {
+            if (!class_exists('shipping')) {
+                require DIR_WS_CLASSES . 'shipping.php';
+            }
+            $shipping_modules = new shipping($_SESSION['shipping']);
+        }
 
-      // load OT modules so that discounts and taxes can be assessed
-      if (!class_exists('order_total')) require(DIR_WS_CLASSES . 'order_total.php');
-      $order_total_modules = new order_total;
-      $order_totals = $order_total_modules->pre_confirmation_check();
-      $order_totals = $order_total_modules->process();
-      $this->zcLog('ec_step2 ', 'Instantiated $order object contents: ' . print_r($order, true));
+        // load OT modules so that discounts and taxes can be assessed
+        if (!class_exists('order_total')) {
+            require DIR_WS_CLASSES . 'order_total.php';
+        }
+        $order_total_modules = new order_total();
+        $order_totals = $order_total_modules->pre_confirmation_check();
+        $order_totals = $order_total_modules->process();
+        $this->zcLog('ec_step2 ', 'Instantiated $order object contents: ' . print_r($order, true));
     }
 
-    if ($order->info['total'] < 0.01 && urldecode($response[$this->requestPrefix . 'AMT']) > 0) $order->info['total'] = urldecode($response[$this->requestPrefix . 'AMT']);
+    if ($order->info['total'] < 0.01 && urldecode($response[$this->requestPrefix . 'AMT']) > 0) {
+        $order->info['total'] = urldecode($response[$this->requestPrefix . 'AMT']);
+    }
     //$this->zcLog('ec_step2 - processed info', print_r(array_merge($step2_payerinfo, $step2_shipto), true));
 
     // send data off to build account, log in, set addresses, place order
@@ -2034,7 +2040,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
 
     // see if we found a record, if yes, then use it instead of default American format
     if (!$country1->EOF) {
-      $country_id = $country1->fields['countries_id'];
+            $country_id = (int)$country1->fields['countries_id'];
         if (!isset($paypal_ec_payer_info['ship_country_code']) || $paypal_ec_payer_info['ship_country_code'] == '') {
             $paypal_ec_payer_info['ship_country_code'] = $country1->fields['countries_iso_code_2'];
         }
@@ -2042,7 +2048,7 @@ if (false) { // disabled until clarification is received about coupons in PayPal
         $address_format_id = (int)$country1->fields['address_format_id'];
     } elseif (!$country2->EOF) {
         // if didn't find it based on name, check using ISO code (ie: in case of no-shipping-address required/supplied)
-        $country_id = $country2->fields['countries_id'];
+            $country_id = (int)$country2->fields['countries_id'];
         $country_code3 = $country2->fields['countries_iso_code_3'];
         $address_format_id = (int)$country2->fields['address_format_id'];
     } else {
@@ -2057,18 +2063,19 @@ if (false) { // disabled until clarification is received about coupons in PayPal
       }
     }
     // Need to determine zone, based on zone name first, and then zone code if name fails check. Otherwise uses 0.
-    $sql = "SELECT zone_id
-                  FROM " . TABLE_ZONES . "
-                  WHERE zone_country_id = :zCountry
-                  AND zone_code = :zoneCode
-                   OR zone_name = :zoneCode
-                  LIMIT 1";
-    $sql = $db->bindVars($sql, ':zCountry', $country_id, 'integer');
-    $sql = $db->bindVars($sql, ':zoneCode', $paypal_ec_payer_info['ship_state'], 'string');
-    $states = $db->Execute($sql);
-    if ($states->RecordCount() > 0) {
-      $state_id = $states->fields['zone_id'];
-    }
+        $sql =
+            "SELECT zone_id
+               FROM " . TABLE_ZONES . "
+              WHERE zone_country_id = :zCountry
+                AND zone_code = :zoneCode
+                 OR zone_name = :zoneCode
+              LIMIT 1";
+        $sql = $db->bindVars($sql, ':zCountry', $country_id, 'integer');
+        $sql = $db->bindVars($sql, ':zoneCode', $paypal_ec_payer_info['ship_state'], 'string');
+        $states = $db->Execute($sql);
+        if (!$states->EOF) {
+            $state_id = (int)$states->fields['zone_id'];
+        }
     /**
      * Using the supplied data from PayPal, set the data into the order record
      */
@@ -2999,12 +3006,12 @@ if (false) { // disabled until clarification is received about coupons in PayPal
             }
       }
     }
-    /** Handle unilateral **/
+    /* Handle unilateral **/
     if (!empty($response['RESULT']) && $response['RESULT'] == 'Unauthorized: Unilateral') {
       $errorText = $response['RESULT'] . MODULE_PAYMENT_PAYPALWPP_TEXT_UNILATERAL;
       $messageStack->add_session($errorText, 'error');
     }
-    /** Handle FMF Scenarios **/
+    /* Handle FMF Scenarios **/
       $response['L_ERRORCODE0'] = empty($response['L_ERRORCODE0']) ? 0 : $response['L_ERRORCODE0'];
       $response['L_LONGMESSAGE2'] = empty($response['L_LONGMESSAGE2']) ? '' : $response['L_LONGMESSAGE2'];
     if (in_array($operation, array('DoExpressCheckoutPayment', 'DoDirectPayment'))
@@ -3061,6 +3068,18 @@ if (false) { // disabled until clarification is received about coupons in PayPal
           if ($response['L_ERRORCODE0'] == 10736) $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_ADDR_ERROR;
           if ($response['L_ERRORCODE0'] == 10752) $errorText = MODULE_PAYMENT_PAYPALWPP_TEXT_DECLINED;
 
+          // More optional response elements; initialize them to prevent follow-on PHP notices.
+          $response_optional = [
+            'L_ERRORCODE1',
+            'L_SHORTMESSAGE1',
+            'L_LONGMESSAGE1',
+            'L_ERRORCODE2',
+            'L_SHORTMESSAGE2',
+            'L_LONGMESSAGE2',
+          ];
+          foreach ($response_optional as $optional) {
+            $response[$optional] ??= '';
+          }
           $detailedMessage = ($errorText == MODULE_PAYMENT_PAYPALWPP_TEXT_GEN_ERROR || (int)trim($errorNum) > 0 || $this->enableDebugging || $response['CURL_ERRORS'] != '' || $this->emailAlerts) ? $errorNum . ' ' . urldecode(' ' . $response['L_SHORTMESSAGE0'] . ' - ' . $response['L_LONGMESSAGE0'] . (isset($response['RESPMSG']) ? ' ' . $response['RESPMSG'] : '') . ' ' . $response['CURL_ERRORS']) : '';
           $detailedEmailMessage = ($detailedMessage == '') ? '' : $errorInfo . MODULE_PAYMENT_PAYPALWPP_TEXT_EMAIL_ERROR_MESSAGE . urldecode($response['L_ERRORCODE0'] . "\n" . $response['L_SHORTMESSAGE0'] . "\n" . $response['L_LONGMESSAGE0'] . $response['L_ERRORCODE1'] . "\n" . $response['L_SHORTMESSAGE1'] . "\n" . $response['L_LONGMESSAGE1'] . $response['L_ERRORCODE2'] . "\n" . $response['L_SHORTMESSAGE2'] . "\n" . $response['L_LONGMESSAGE2'] . ($response['CURL_ERRORS'] != '' ? "\n" . $response['CURL_ERRORS'] : '') . "\n\n" . 'Zen Cart message: ' . $errorText);
           if (!isset($response['L_ERRORCODE0']) && isset($response['RESULT'])) $detailedEmailMessage .= "\n\n" . print_r($response, TRUE);
